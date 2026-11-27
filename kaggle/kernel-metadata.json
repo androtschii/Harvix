@@ -1,0 +1,14 @@
+{
+  "id": "androtschii/harvix-render-gpu",
+  "title": "harvix-render-gpu",
+  "code_file": "render_gpu.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "machine_shape": "NvidiaTeslaT4",
+  "dataset_sources": ["androtschii/harvix-assets"],
+  "competition_sources": [],
+  "kernel_sources": []
+}
