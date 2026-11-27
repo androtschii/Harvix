@@ -1,0 +1,19 @@
+# Large binary assets: download from the take-home package, never commit
+assets/*.blend
+assets/*.blend1
+assets/*.glb
+
+# Generated data
+out/
+dataset_full/
+*.exr
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.venv/
+
+# Tooling output
+graphify-out/

@@ -1,0 +1,219 @@
+{
+ "robot": "Harvix dual-arm tomato-harvesting robot (design v3, film look)",
+ "units": "metres, radians",
+ "up_axis_blend": "+Z",
+ "drive_direction": "+X",
+ "overall_size_m": {
+  "length_x": 2.43,
+  "width_y": 0.85,
+  "height_z": 2.55
+ },
+ "pose_control_object": "HV_ROOT",
+ "joint_property_prefix": "q_",
+ "joint_limits": {
+  "left_elbow": {
+   "lower": -2.3,
+   "upper": 2.3,
+   "kind": "revolute"
+  },
+  "left_fingers": {
+   "lower": -1.1,
+   "upper": 1.1,
+   "kind": "revolute"
+  },
+  "left_grabber_joint": {
+   "lower": 0.0,
+   "upper": 0.8,
+   "kind": "revolute"
+  },
+  "left_lift": {
+   "lower": -0.73,
+   "upper": 0.8,
+   "kind": "prismatic"
+  },
+  "left_pusher": {
+   "lower": 0.0,
+   "upper": 0.3,
+   "kind": "prismatic"
+  },
+  "left_rotator": {
+   "lower": -3.141592653589793,
+   "upper": 3.141592653589793,
+   "kind": "continuous"
+  },
+  "left_scissors": {
+   "lower": 0.0,
+   "upper": 0.8,
+   "kind": "revolute"
+  },
+  "left_shoulder": {
+   "lower": -1.66,
+   "upper": 1.66,
+   "kind": "revolute"
+  },
+  "left_tool": {
+   "lower": 0.0,
+   "upper": 0.1,
+   "kind": "prismatic"
+  },
+  "left_wrist": {
+   "lower": -3.14,
+   "upper": 3.14159,
+   "kind": "revolute"
+  },
+  "rail_joint": {
+   "lower": -5.0,
+   "upper": 5.0,
+   "kind": "prismatic"
+  },
+  "right_elbow": {
+   "lower": -2.3,
+   "upper": 2.3,
+   "kind": "revolute"
+  },
+  "right_fingers": {
+   "lower": -1.1,
+   "upper": 1.1,
+   "kind": "revolute"
+  },
+  "right_grabber_joint": {
+   "lower": 0.0,
+   "upper": 0.8,
+   "kind": "revolute"
+  },
+  "right_lift": {
+   "lower": -0.73,
+   "upper": 0.8,
+   "kind": "prismatic"
+  },
+  "right_pusher": {
+   "lower": 0.0,
+   "upper": 0.3,
+   "kind": "prismatic"
+  },
+  "right_rotator": {
+   "lower": -3.141592653589793,
+   "upper": 3.141592653589793,
+   "kind": "continuous"
+  },
+  "right_scissors": {
+   "lower": 0.0,
+   "upper": 0.8,
+   "kind": "revolute"
+  },
+  "right_shoulder": {
+   "lower": -1.66,
+   "upper": 1.66,
+   "kind": "revolute"
+  },
+  "right_tool": {
+   "lower": 0.0,
+   "upper": 0.1,
+   "kind": "prismatic"
+  },
+  "right_wrist": {
+   "lower": -3.14,
+   "upper": 3.14159,
+   "kind": "revolute"
+  }
+ },
+ "poses": {
+  "neutral": {
+   "left_elbow": 0.0,
+   "left_fingers": 0.0,
+   "left_grabber_joint": 0.0,
+   "left_lift": 0.0,
+   "left_pusher": 0.0,
+   "left_rotator": 0.0,
+   "left_scissors": 0.0,
+   "left_shoulder": 0.0,
+   "left_tool": 0.0,
+   "left_wrist": 0.0,
+   "rail_joint": 0.0,
+   "right_elbow": 0.0,
+   "right_fingers": 0.0,
+   "right_grabber_joint": 0.0,
+   "right_lift": 0.0,
+   "right_pusher": 0.0,
+   "right_rotator": 0.0,
+   "right_scissors": 0.0,
+   "right_shoulder": 0.0,
+   "right_tool": 0.0,
+   "right_wrist": 0.0
+  },
+  "stow": {
+   "left_shoulder": -1.6,
+   "left_elbow": 2.3,
+   "left_wrist": -2.25,
+   "left_fingers": -1.0,
+   "left_pusher": 0.0,
+   "left_rotator": 0.0,
+   "left_lift": -0.73,
+   "right_shoulder": -1.6,
+   "right_elbow": 2.3,
+   "right_wrist": 2.25,
+   "right_fingers": -1.0,
+   "right_pusher": 0.0,
+   "right_rotator": 0.0,
+   "right_lift": -0.73,
+   "left_grabber_joint": 0.0,
+   "left_scissors": 0.0,
+   "right_grabber_joint": 0.0,
+   "right_scissors": 0.0
+  }
+ },
+ "status_light_property": "hv_status_rgb  [r,g,b,strength]",
+ "materials": [
+  "#bfbfbfff.001",
+  "AR3DMat PBR Brushed Aluminum",
+  "Aluminum",
+  "Aluminum.001",
+  "Aluminum_Engraved_v2",
+  "Black plastic",
+  "Black steel",
+  "Brass",
+  "Brushed Aluminum",
+  "Brushed Aluminum.001",
+  "COORD tip and titles",
+  "Carbon FIber Shader",
+  "Carbon Fiber 03",
+  "Carbon Fiber Procedural",
+  "DESIGN cut",
+  "DESIGN grab",
+  "DESIGN left",
+  "DESIGN right",
+  "DESIGN rod",
+  "DESIGN steel",
+  "Dark Steel",
+  "Die-cast aluminum",
+  "Die-cast aluminum.001",
+  "Edge Wear Plastic (Worn Green Plastic)",
+  "Frozen white metal",
+  "Glass",
+  "HV_status_light",
+  "Harvix harvest crate",
+  "ID_DECAL_Ink",
+  "ID_DECAL_Label",
+  "Leather Fabric - Black 70",
+  "Metal",
+  "STUDIO_floor",
+  "Screen",
+  "Screen.001",
+  "White fabric.001"
+ ],
+ "collections": {
+  "FIN_ROBOT/ROBOT_V3": "robot parts + rig empties",
+  "ROBOT_V3_CRATES": "two green harvest crates on the deck",
+  "STUDIO": "shadow-catcher floor + 3 area lights",
+  "CAMERAS": "7 framed cameras"
+ },
+ "cameras": [
+  "CAM_Detail_Tool",
+  "CAM_Front",
+  "CAM_Hero_34",
+  "CAM_Low_Hero",
+  "CAM_Rear_34",
+  "CAM_Side_Arms",
+  "CAM_Top"
+ ]
+}
