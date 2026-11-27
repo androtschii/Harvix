@@ -1,0 +1,943 @@
+{
+ "file": "C:\\Users\\User01\\Desktop\\Harvix\\assets\\Harvix_Greenhouse.blend",
+ "blender": "5.3.0",
+ "scene": "Harvix Greenhouse",
+ "render": {
+  "engine": "CYCLES",
+  "resolution": [
+   3840,
+   2160
+  ],
+  "percentage": 50,
+  "camera": "CAM_Row_End_Hero",
+  "frame_range": [
+   1,
+   1
+  ]
+ },
+ "counts": {
+  "objects": 828,
+  "by_type": {
+   "CAMERA": 6,
+   "MESH": 731,
+   "EMPTY": 80,
+   "LIGHT": 1,
+   "FONT": 10
+  },
+  "meshes": 730,
+  "materials": 57,
+  "collections": 118,
+  "node_groups": 33,
+  "images": 69
+ },
+ "collections": {
+  "name": "Scene Collection",
+  "objects": 0,
+  "all_objects": 372,
+  "types": {},
+  "children": [
+   {
+    "name": "CAMERAS",
+    "objects": 6,
+    "all_objects": 6,
+    "types": {
+     "CAMERA": 6
+    }
+   },
+   {
+    "name": "GH_SET",
+    "objects": 0,
+    "all_objects": 131,
+    "types": {},
+    "children": [
+     {
+      "name": "VENLO Structure",
+      "objects": 3,
+      "all_objects": 3,
+      "types": {
+       "MESH": 3
+      }
+     },
+     {
+      "name": "VENLO Cultivation",
+      "objects": 7,
+      "all_objects": 7,
+      "types": {
+       "MESH": 7
+      }
+     },
+     {
+      "name": "VENLO Services",
+      "objects": 16,
+      "all_objects": 16,
+      "types": {
+       "MESH": 16
+      }
+     },
+     {
+      "name": "VENLO Robot movement and parking",
+      "objects": 29,
+      "all_objects": 29,
+      "types": {
+       "MESH": 29
+      }
+     },
+     {
+      "name": "VENLO Robot docking and guide lines",
+      "objects": 51,
+      "all_objects": 51,
+      "types": {
+       "MESH": 51
+      }
+     },
+     {
+      "name": "GH_DETAILS",
+      "objects": 23,
+      "all_objects": 23,
+      "types": {
+       "MESH": 23
+      }
+     },
+     {
+      "name": "GH_EXTERIOR_BASIC",
+      "objects": 1,
+      "all_objects": 1,
+      "types": {
+       "MESH": 1
+      }
+     },
+     {
+      "name": "GH_RAIL_ENDS_V3",
+      "objects": 1,
+      "all_objects": 1,
+      "types": {
+       "MESH": 1
+      }
+     }
+    ]
+   },
+   {
+    "name": "FIN_GLASS",
+    "objects": 0,
+    "all_objects": 2,
+    "types": {},
+    "children": [
+     {
+      "name": "VENLO Glass envelope",
+      "objects": 1,
+      "all_objects": 1,
+      "types": {
+       "MESH": 1
+      }
+     },
+     {
+      "name": "GH_VENT_GLASS",
+      "objects": 1,
+      "all_objects": 1,
+      "types": {
+       "MESH": 1
+      }
+     }
+    ]
+   },
+   {
+    "name": "FIN_MARKINGS",
+    "objects": 104,
+    "all_objects": 104,
+    "types": {
+     "MESH": 94,
+     "FONT": 10
+    }
+   },
+   {
+    "name": "GH_PLANTS",
+    "objects": 2,
+    "all_objects": 2,
+    "types": {
+     "MESH": 2
+    }
+   },
+   {
+    "name": "FIN_TOMATO",
+    "objects": 1,
+    "all_objects": 1,
+    "types": {
+     "MESH": 1
+    }
+   },
+   {
+    "name": "LIGHTING",
+    "objects": 1,
+    "all_objects": 1,
+    "types": {
+     "LIGHT": 1
+    }
+   },
+   {
+    "name": "FIN_ROBOT",
+    "objects": 0,
+    "all_objects": 118,
+    "types": {},
+    "children": [
+     {
+      "name": "H01",
+      "objects": 118,
+      "all_objects": 118,
+      "types": {
+       "MESH": 40,
+       "EMPTY": 78
+      }
+     }
+    ]
+   },
+   {
+    "name": "ROBOT_CRATES",
+    "objects": 0,
+    "all_objects": 4,
+    "types": {},
+    "children": [
+     {
+      "name": "H01_crates",
+      "objects": 4,
+      "all_objects": 4,
+      "types": {
+       "EMPTY": 2,
+       "MESH": 2
+      }
+     }
+    ]
+   },
+   {
+    "name": "GROWSLAB_SOURCES",
+    "objects": 3,
+    "all_objects": 3,
+    "types": {
+     "MESH": 3
+    }
+   }
+  ]
+ },
+ "object_name_patterns": {
+  "VENLO traffic lane divider": 28,
+  "VENLO dock bay boundary": 11,
+  "VENLO service door jamb": 4,
+  "VENLO service hall split wall": 4,
+  "GH vent motor": 2,
+  "VENLO parking 01 boundary": 2,
+  "VENLO parking 02 boundary": 2,
+  "VENLO parking 03 boundary": 2,
+  "VENLO parking 04 boundary": 2,
+  "VENLO parking 05 boundary": 2,
+  "VENLO parking 06 boundary": 2,
+  "VENLO parking 07 boundary": 2,
+  "VENLO parking 08 boundary": 2,
+  "VENLO parking 09 boundary": 2,
+  "VENLO parking 10 boundary": 2,
+  "VENLO parking 11 boundary": 2,
+  "VENLO parking 12 boundary": 2,
+  "VENLO parking 13 boundary": 2,
+  "VENLO parking 14 boundary": 2,
+  "VENLO parking 15 boundary": 2,
+  "VENLO parking 16 boundary": 2,
+  "VENLO service door lintel": 2,
+  "VENLO service hall wall": 2,
+  "VENLO travel lane east edge": 2,
+  "VENLO travel lane west edge": 2,
+  "CAM_Aerial": 1,
+  "CAM_Cross_Aisle": 1,
+  "CAM_Gutter_Detail": 1,
+  "CAM_In_Row": 1,
+  "CAM_Row_End_Front": 1,
+  "CAM_Row_End_Hero": 1,
+  "GH air handling unit": 1,
+  "GH air sock": 1,
+  "GH air sock cap": 1,
+  "GH air sock hanger": 1,
+  "GH air sock header": 1,
+  "GH drive shaft": 1,
+  "GH exterior ground": 1,
+  "GH floor header": 1,
+  "GH harvest trolley": 1
+ },
+ "keyword_object_patterns": {
+  "CAM_In_Row": 1,
+  "CAM_Row_End_Front": 1,
+  "CAM_Row_End_Hero": 1,
+  "GH rail bend": 1,
+  "GH rail clip": 1,
+  "GH rail end ramps 550": 1,
+  "GH row board": 1,
+  "GH row board bracket": 1,
+  "GH_fruit_instancer": 1,
+  "GH_plant_instancer": 1,
+  "GROWSLAB_instancer": 1,
+  "GROWSLAB_v0": 1,
+  "GROWSLAB_v1": 1,
+  "GROWSLAB_v2": 1,
+  "H01_DESIGN_J_rail_joint": 1,
+  "H01_DESIGN_ORIGIN_rail_joint": 1,
+  "PLANT_V01_far_canopy": 1,
+  "PLANT_V01_far_cube": 1,
+  "PLANT_V01_far_stem": 1,
+  "PLANT_V01_far_T01": 1,
+  "PLANT_V01_far_T02": 1,
+  "PLANT_V01_far_T03": 1,
+  "PLANT_V01_far_T04": 1,
+  "PLANT_V01_far_T05": 1,
+  "PLANT_V01_mid_canopy": 1,
+  "PLANT_V01_mid_cube": 1,
+  "PLANT_V01_mid_stem": 1,
+  "PLANT_V01_mid_T01": 1,
+  "PLANT_V01_mid_T02": 1,
+  "PLANT_V01_mid_T03": 1,
+  "PLANT_V01_mid_T04": 1,
+  "PLANT_V01_mid_T05": 1,
+  "PLANT_V01_near_canopy": 1,
+  "PLANT_V01_near_cube": 1,
+  "PLANT_V01_near_stem": 1,
+  "PLANT_V01_near_T01": 1,
+  "PLANT_V01_near_T02": 1,
+  "PLANT_V01_near_T03": 1,
+  "PLANT_V01_near_T04": 1,
+  "PLANT_V01_near_T05": 1
+ },
+ "cameras": {
+  "CAM_Aerial": {
+   "type": "CAMERA",
+   "parent": null,
+   "location": [
+    -30.0,
+    -25.0,
+    60.0
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_Cross_Aisle": {
+   "type": "CAMERA",
+   "parent": null,
+   "location": [
+    22.0,
+    61.0,
+    2.2
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_Gutter_Detail": {
+   "type": "CAMERA",
+   "parent": null,
+   "location": [
+    11.25,
+    37.4,
+    1.12
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_In_Row": {
+   "type": "CAMERA",
+   "parent": null,
+   "location": [
+    13.0,
+    51.0,
+    1.6
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_Row_End_Front": {
+   "type": "CAMERA",
+   "parent": null,
+   "location": [
+    13.0,
+    61.6,
+    1.35
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_Row_End_Hero": {
+   "type": "CAMERA",
+   "parent": null,
+   "location": [
+    15.2,
+    60.8,
+    1.5
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "lights": {
+  "HV_SUN": {
+   "type": "LIGHT",
+   "parent": null,
+   "location": [
+    16.6514,
+    -35.709,
+    30.7831
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": "SUN",
+   "energy": 3.200000047683716
+  }
+ },
+ "world": "HV_WORLD_greenhouse",
+ "instancers": {
+  "count": 0,
+  "collections": {}
+ },
+ "geometry_nodes_objects": {
+  "GH_fruit_instancer": {
+   "type": "MESH",
+   "parent": null,
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dimensions": [
+    82.5,
+    113.25,
+    0.0
+   ],
+   "modifiers": [
+    [
+     "NODES",
+     "GH plants"
+    ]
+   ],
+   "materials": [],
+   "verts": 24024
+  },
+  "GH_plant_instancer": {
+   "type": "MESH",
+   "parent": null,
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dimensions": [
+    82.5,
+    113.25,
+    0.0
+   ],
+   "modifiers": [
+    [
+     "NODES",
+     "GH plants"
+    ]
+   ],
+   "materials": [],
+   "verts": 24024
+  },
+  "GROWSLAB_instancer": {
+   "type": "MESH",
+   "parent": null,
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dimensions": [
+    82.5078,
+    112.6875,
+    0.0
+   ],
+   "modifiers": [
+    [
+     "NODES",
+     "GROWSLAB instances"
+    ]
+   ],
+   "materials": [],
+   "verts": 8064
+  }
+ },
+ "node_groups": [
+  "Bsdf",
+  "Carbon Fiber",
+  "Carbon Fiber Shader",
+  "Color Ramp",
+  "Curated Principle Shader V2.004",
+  "Edge Wear",
+  "Edge Wear Plastic",
+  "Edge wear.001",
+  "Frensel.001",
+  "Fresnel",
+  "GH_FruitInstancer",
+  "GH_PlantInstancer",
+  "Glass Noise Reduction",
+  "GROWSLAB_instances",
+  "Input Color Ramp.001",
+  "Main Color",
+  "Mapping Ver. 2",
+  "Micro Roughness",
+  "Micro Roughness.002",
+  "NodeGroup.003",
+  "Normal Conversion.004",
+  "Pealed Color",
+  "Reflection",
+  "Reflection.002",
+  "Roughness Control",
+  "Roughness Mask",
+  "Scatter.001",
+  "Scratshes",
+  "Screen",
+  "small Details Bumb",
+  "UV Scaling and Rotation.004",
+  "Vector.001",
+  "Worn Mask"
+ ],
+ "materials": {
+  "VENLO galvanized steel": 2,
+  "VENLO irrigation pipe": 2,
+  "VENLO white gutters": 2,
+  "#bfbfbfff": 1,
+  "Aluminum": 1,
+  "Aluminum_Engraved_v2": 1,
+  "AR3DMat PBR Brushed Aluminum": 1,
+  "Black plastic": 1,
+  "Black steel": 1,
+  "Brass": 1,
+  "Brushed Aluminum": 1,
+  "Carbon Fiber 03": 1,
+  "Carbon Fiber Procedural": 1,
+  "Carbon FIber Shader": 1,
+  "COORD tip and titles": 1,
+  "CROP_V3_fruit": 1,
+  "CROP_V3_stalk": 1,
+  "CROP_V4_stem": 1,
+  "CROP_V4_twine": 1,
+  "Dark Steel": 1,
+  "Die-cast aluminum": 1,
+  "Edge Wear Plastic (Worn Green Plastic)": 1,
+  "Frozen white metal": 1,
+  "GH air sock polythene": 1,
+  "GH aluminium": 1,
+  "GH blank board": 1,
+  "GH energy screen": 1,
+  "GH exterior ground": 1,
+  "GH rubber": 1,
+  "GH trolley galvanised": 1,
+  "Glass": 1,
+  "GROWSLAB_cube_film": 1,
+  "GROWSLAB_white_film": 1,
+  "Harvix harvest crate": 1,
+  "HV_status_light": 1,
+  "ID_DECAL_Ink": 1,
+  "ID_DECAL_Label": 1,
+  "Leather Fabric - Black 70": 1,
+  "Metal": 1,
+  "Pinnate_leaf_mat": 1,
+  "RAIL_Galvanised_placeholder": 1,
+  "Screen": 1,
+  "STUDY_leaf_far": 1,
+  "Tomato_leaf_mat": 1,
+  "Tomato_leaf_on_black__mat": 1,
+  "Tomato_plant_leaves_mat": 1,
+  "VENLO aisle markings": 1,
+  "VENLO concrete": 1,
+  "VENLO dock charger housing": 1,
+  "VENLO dock contact copper": 1,
+  "VENLO dock status light": 1,
+  "VENLO horticultural glass": 1,
+  "VENLO reflective ground cover": 1,
+  "VENLO robot guide line": 1
+ },
+ "keyword_samples": {
+  "CAM_In_Row": {
+   "type": "CAMERA",
+   "parent": null,
+   "location": [
+    13.0,
+    51.0,
+    1.6
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_Row_End_Front": {
+   "type": "CAMERA",
+   "parent": null,
+   "location": [
+    13.0,
+    61.6,
+    1.35
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_Row_End_Hero": {
+   "type": "CAMERA",
+   "parent": null,
+   "location": [
+    15.2,
+    60.8,
+    1.5
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "GH rail bend": {
+   "type": "MESH",
+   "parent": null,
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dimensions": [
+    82.6004,
+    114.6004,
+    0.051
+   ],
+   "materials": [
+    "VENLO galvanized steel.001"
+   ],
+   "verts": 13440
+  },
+  "GH rail clip": {
+   "type": "MESH",
+   "parent": null,
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dimensions": [
+    82.62,
+    112.03,
+    0.1105
+   ],
+   "materials": [
+    "VENLO galvanized steel.001"
+   ],
+   "verts": 36288
+  },
+  "GH rail end ramps 550": {
+   "type": "MESH",
+   "parent": null,
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dimensions": [
+    82.7,
+    6.7,
+    0.111
+   ],
+   "materials": [
+    "RAIL_Galvanised_placeholder"
+   ],
+   "verts": 86184
+  },
+  "GH row board": {
+   "type": "MESH",
+   "parent": null,
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dimensions": [
+    82.36,
+    6.112,
+    0.26
+   ],
+   "materials": [
+    "GH blank board"
+   ],
+   "verts": 672
+  },
+  "GH row board bracket": {
+   "type": "MESH",
+   "parent": null,
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dimensions": [
+    82.016,
+    6.016,
+    0.82
+   ],
+   "materials": [
+    "VENLO galvanized steel.001"
+   ],
+   "verts": 672
+  },
+  "GH_fruit_instancer": {
+   "type": "MESH",
+   "parent": null,
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dimensions": [
+    82.5,
+    113.25,
+    0.0
+   ],
+   "modifiers": [
+    [
+     "NODES",
+     "GH plants"
+    ]
+   ],
+   "materials": [],
+   "verts": 24024
+  },
+  "GH_plant_instancer": {
+   "type": "MESH",
+   "parent": null,
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dimensions": [
+    82.5,
+    113.25,
+    0.0
+   ],
+   "modifiers": [
+    [
+     "NODES",
+     "GH plants"
+    ]
+   ],
+   "materials": [],
+   "verts": 24024
+  },
+  "GROWSLAB_instancer": {
+   "type": "MESH",
+   "parent": null,
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dimensions": [
+    82.5078,
+    112.6875,
+    0.0
+   ],
+   "modifiers": [
+    [
+     "NODES",
+     "GROWSLAB instances"
+    ]
+   ],
+   "materials": [],
+   "verts": 8064
+  },
+  "GROWSLAB_v0": {
+   "type": "MESH",
+   "parent": null,
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dimensions": [
+    0.2365,
+    1.0,
+    0.1351
+   ],
+   "materials": [
+    "GROWSLAB_white_film"
+   ],
+   "verts": 1596
+  },
+  "GROWSLAB_v1": {
+   "type": "MESH",
+   "parent": null,
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dimensions": [
+    0.2373,
+    1.0,
+    0.136
+   ],
+   "materials": [
+    "GROWSLAB_white_film"
+   ],
+   "verts": 1596
+  },
+  "GROWSLAB_v2": {
+   "type": "MESH",
+   "parent": null,
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dimensions": [
+    0.2381,
+    1.0,
+    0.1361
+   ],
+   "materials": [
+    "GROWSLAB_white_film"
+   ],
+   "verts": 1596
+  },
+  "H01_DESIGN_J_rail_joint": {
+   "type": "EMPTY",
+   "parent": "H01_DESIGN_ORIGIN_rail_joint",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "root": {
+  "location": [
+   13.0,
+   55.5,
+   0.0803
+  ],
+  "rotation_euler": [
+   0.0,
+   -0.0,
+   1.5708
+  ],
+  "custom_props": {
+   "q_left_elbow": 0.0,
+   "q_left_fingers": 0.0,
+   "q_left_grabber_joint": 0.0,
+   "q_left_lift": 0.0,
+   "q_left_pusher": 0.0,
+   "q_left_rotator": 0.0,
+   "q_left_scissors": 0.0,
+   "q_left_shoulder": 0.0,
+   "q_left_tool": 0.0,
+   "q_left_wrist": 0.0,
+   "q_rail_joint": 0.0,
+   "q_right_elbow": 0.0,
+   "q_right_fingers": 0.0,
+   "q_right_grabber_joint": 0.0,
+   "q_right_lift": 0.0,
+   "q_right_pusher": 0.0,
+   "q_right_rotator": 0.0,
+   "q_right_scissors": 0.0,
+   "q_right_shoulder": 0.0,
+   "q_right_tool": 0.0,
+   "q_right_wrist": 0.0,
+   "hv_drive_distance": 0.0,
+   "hv_robot_id": "H01",
+   "hv_status": "green",
+   "hv_status_rgb": "[0.05, 1.0, 0.12, 12.0]",
+   "hv_joint_limits": "{\"left_elbow\": {\"lower\": -2.3, \"upper\": 2.3, \"kind\": \"revolute\", \"velocity\": 1.57, \"acceleration\": 3.0}, \"left_fingers\": {\"lower\": -1.1, \"upper\": 1.1, \"kind\": \"revolute\", \"velocity\": 1.0, \"acceleration\": 2.0}, \"left_grabber_joint\": {\"lower\": 0.0, \"upper\": 0.8, \"kind\": \"revolute\", \"velocity\": 2.0, \"acceleration\": 4.0}, \"left_lift\": {\"lower\": -0.73, \"upper\": 0.8, \"kind\": \"prismatic\", \"velocity\": 0.2, \"acceleration\": 0.5}, \"left_pusher\": {\"lower\": 0.0, \"upper\": 0.3, \"kind\": \"prismatic\", \"velocity\": 0.3, \"acceleration\": 1.0}, \"left_rotator\": {\"lower\": -3.141592653589793, \"upper\": 3.141592653589793, \"kind\": \"continuous\", \"velocity\": 5.0, \"acceleration\": 10.0}, \"left_scissors\": {\"lower\": 0.0, \"upper\": 0.8, \"kind\": \"revolute\", \"velocity\": 2.0, \"acceleration\": 4.0}, \"left_shoulder\": {\"lower\": -1.66, \"upper\": 1.66, \"kind\": \"revolute\", \"velocity\": 1.57, \"acceleration\": 3.0}, \"left_tool\": {\"lower\": 0.0, \"upper\": 0.1, \"kind\": \"prismatic\", \"velocity\": 0.12, \"acceleration\": 0.25}, \"left_wrist\": {\"lower\": -3.14, \"upper\": 3.14159, \"kind\": \"revolute\", \"velocity\": 1.57, \"acceleration\": 3.0}, \"rail_joint\": {\"lower\": -5.0, \"upper\": 5.0, \"kind\": \"prismatic\", \"velocity\": 0.5, \"acceleration\": 1.0}, \"right_elbow\": {\"lower\": -2.3, \"upper\": 2.3, \"kind\": \"revolute\", \"velocity\": 1.57, \"acceleration\": 3.0}, \"right_fingers\": {\"lower\": -1.1, \"upper\": 1.1, \"kind\": \"revolute\", \"velocity\": 1.0, \"acceleration\": 2.0}, \"right_grabber_joint\": {\"lower\": 0.0, \"upper\": 0.8, \"kind\": \"revolute\", \"velocity\": 2.0, \"acceleration\": 4.0}, \"right_lift\": {\"lower\": -0.73, \"upper\": 0.8, \"kind\": \"prismatic\", \"velocity\": 0.2, \"acceleration\": 0.5}, \"right_pusher\": {\"lower\": 0.0, \"upper\": 0.3, \"kind\": \"prismatic\", \"velocity\": 0.3, \"acceleration\": 1.0}, \"right_rotator\": {\"lower\": -3.141592653589793, \"upper\": 3.141592653589793, \"kind\": \"continuous\", \"velocity\": 5.0, \"acceleration\": 10.0}, \"right_scissors\": {\"lower\": 0.0, \"upper\": 0.8, \"kind\": \"revolute\", \"velocity\": 2.0, \"acceleration\": 4.0}, \"right_shoulder\": {\"lower\": -1.66, \"upper\": 1.66, \"kind\": \"revolute\", \"velocity\": 1.57, \"acceleration\": 3.0}, \"right_tool\": {\"lower\": 0.0, \"upper\": 0.1, \"kind\": \"prismatic\", \"velocity\": 0.12, \"acceleration\": 0.25}, \"right_wrist\": {\"lower\": -3.14, \"upper\": 3.14159, \"kind\": \"revolute\", \"velocity\": 1.57, \"acceleration\": 3.0}}",
+   "hv_joint_names": "[\"left_elbow\", \"left_fingers\", \"left_grabber_joint\", \"left_lift\", \"left_pusher\", \"left_rotator\", \"left_scissors\", \"left_shoulder\", \"left_tool\", \"left_wrist\", \"rail_joint\", \"right_elbow\", \"right_fingers\", \"right_grabber_joint\", \"right_lift\", \"right_pusher\", \"right_rotator\", \"right_scissors\", \"right_shoulder\", \"right_tool\", \"right_wrist\"]",
+   "hv_ground_offset_m": 0.16000071716983666,
+   "hv_lod": "hero",
+   "hv_poses": "{\"neutral\": {\"left_elbow\": 0.0, \"left_fingers\": 0.0, \"left_grabber_joint\": 0.0, \"left_lift\": 0.0, \"left_pusher\": 0.0, \"left_rotator\": 0.0, \"left_scissors\": 0.0, \"left_shoulder\": 0.0, \"left_tool\": 0.0, \"left_wrist\": 0.0, \"rail_joint\": 0.0, \"right_elbow\": 0.0, \"right_fingers\": 0.0, \"right_grabber_joint\": 0.0, \"right_lift\": 0.0, \"right_pusher\": 0.0, \"right_rotator\": 0.0, \"right_scissors\": 0.0, \"right_shoulder\": 0.0, \"right_tool\": 0.0, \"right_wrist\": 0.0}, \"stow\": {\"left_shoulder\": -1.6, \"left_elbow\": 2.3, \"left_wrist\": -2.25, \"left_fingers\": -1.0, \"left_pusher\": 0.0, \"left_rotator\": 0.0, \"left_lift\": -0.73, \"right_shoulder\": -1.6, \"right_elbow\": 2.3, \"right_wrist\": 2.25, \"right_fingers\": -1.0, \"right_pusher\": 0.0, \"right_rotator\": 0.0, \"right_lift\": -0.73, \"left_grabber_joint\": 0.0, \"left_scissors\": 0.0, \"right_grabber_joint\": 0.0, \"right_scissors\": 0.0}}",
+   "hv_library_version": "v3.0",
+   "hv_source_sha256": "e25b1a33c0b955867b6a5ae0aba0fbab2589fd603ee531e61866fa88d3c367eb",
+   "hv_contacts": "[{\"name\": \"drive_L\", \"kind\": \"drive\", \"x\": 0.006537322886288166, \"y\": 0.20162499858997762, \"bottom_z\": 7.181322073668284e-07, \"half_width\": 0.03789128888243244, \"radius\": 0.12700000405311584}, {\"name\": \"drive_R\", \"kind\": \"drive\", \"x\": 0.006537321954965591, \"y\": -0.20162488888499763, \"bottom_z\": -5.490378041095312e-09, \"half_width\": 0.03789160269450678, \"radius\": 0.12700000777840614}, {\"name\": \"caster_FL\", \"kind\": \"caster\", \"x\": 0.73356, \"y\": 0.3725, \"bottom_z\": 0.005039304494857788, \"half_width\": 0.023499995470046997, \"radius\": 0.06245378963649273}, {\"name\": \"caster_FR\", \"kind\": \"caster\", \"x\": 0.73356, \"y\": -0.3725, \"bottom_z\": 0.005039304494857788, \"half_width\": 0.023499995470046997, \"radius\": 0.06245378963649273}, {\"name\": \"caster_RL\", \"kind\": \"caster\", \"x\": -0.66144, \"y\": 0.3725, \"bottom_z\": 0.005039304494857788, \"half_width\": 0.023499995470046997, \"radius\": 0.06245378963649273}, {\"name\": \"caster_RR\", \"kind\": \"caster\", \"x\": -0.66144, \"y\": -0.3725, \"bottom_z\": 0.005039304494857788, \"half_width\": 0.023499995470046997, \"radius\": 0.06245378963649273}, {\"name\": \"roller_FL\", \"kind\": \"roller\", \"x\": 0.50676, \"y\": 0.275, \"bottom_z\": 0.10750000000000001, \"half_width\": 0.0325, \"radius\": 0.022, \"flange_radius\": 0.035, \"groove\": \"V/U groove 55 mm wide, root radius 22 mm, flanges 35 mm; seats a 51 mm pipe at the groove root\"}, {\"name\": \"roller_FR\", \"kind\": \"roller\", \"x\": 0.50676, \"y\": -0.275, \"bottom_z\": 0.10750000000000001, \"half_width\": 0.0325, \"radius\": 0.022, \"flange_radius\": 0.035, \"groove\": \"V/U groove 55 mm wide, root radius 22 mm, flanges 35 mm; seats a 51 mm pipe at the groove root\"}, {\"name\": \"roller_RL\", \"kind\": \"roller\", \"x\": -0.49368, \"y\": 0.275, \"bottom_z\": 0.10750000000000001, \"half_width\": 0.0325, \"radius\": 0.022, \"flange_radius\": 0.035, \"groove\": \"V/U groove 55 mm wide, root radius 22 mm, flanges 35 mm; seats a 51 mm pipe at the groove root\"}, {\"name\": \"roller_RR\", \"kind\": \"roller\", \"x\": -0.49368, \"y\": -0.275, \"bottom_z\": 0.10750000000000001, \"half_width\": 0.0325, \"radius\": 0.022, \"flange_radius\": 0.035, \"groove\": \"V/U groove 55 mm wide, root radius 22 mm, flanges 35 mm; seats a 51 mm pipe at the groove root\"}, {\"name\": \"spool_L\", \"kind\": \"spool\", \"x\": 0.006537321954965591, \"y\": 0.2755, \"bottom_z\": 0.10547357988912477, \"radius\": 0.021526420110875234, \"half_width\": 0.015, \"flange_radius\": 0.0375, \"flange_inner_dy\": 0.031, \"note\": \"drive-axle rail spool (same axle as the tyre): carries on the pipes, tyres lifted\"}, {\"name\": \"spool_R\", \"kind\": \"spool\", \"x\": 0.006537321954965591, \"y\": -0.2755, \"bottom_z\": 0.1054740054155687, \"radius\": 0.021525994584431298, \"half_width\": 0.015, \"flange_radius\": 0.0375, \"flange_inner_dy\": 0.031, \"note\": \"drive-axle rail spool (same axle as the tyre): carries on the pipes, tyres lifted\"}]",
+   "hv_wheel_extra": 0.0,
+   "hv_support": "rail",
+   "hv_config": "harvest",
+   "hv_v3_notes": "V3-02: V3-01 carriage fix + ID decal, separated rollers/casters (spin from hv_drive_distance), strap sockets, contacts",
+   "hv_src_name": "HV_ROOT",
+   "hv_robot": "H01"
+  },
+  "descendants": 121,
+  "descendant_types": {
+   "EMPTY": 79,
+   "MESH": 42
+  },
+  "descendants_with_drivers": 170,
+  "descendant_cameras": [],
+  "descendant_name_patterns": {
+   "H01_DESIGN_ORIGIN_rail_joint": 1,
+   "H01_DESIGN_J_rail_joint": 1,
+   "H01_DESIGN_LINK_base_link": 1,
+   "H01_DESIGN_ORIGIN_left_lift": 1,
+   "H01_DESIGN_J_left_lift": 1,
+   "H01_DESIGN_ORIGIN_left_shoulder": 1,
+   "H01_DESIGN_J_left_shoulder": 1,
+   "H01_DESIGN_ORIGIN_left_elbow": 1,
+   "H01_DESIGN_J_left_elbow": 1,
+   "H01_DESIGN_ORIGIN_left_wrist": 1,
+   "H01_DESIGN_J_left_wrist": 1,
+   "H01_DESIGN_ORIGIN_left_fingers": 1,
+   "H01_DESIGN_J_left_fingers": 1,
+   "H01_DESIGN_ORIGIN_left_camera": 1,
+   "H01_DESIGN_J_left_camera": 1,
+   "H01_DESIGN_VIS_left_camera": 1,
+   "H01_DESIGN_ORIGIN_left_pusher": 1,
+   "H01_DESIGN_J_left_pusher": 1,
+   "H01_DESIGN_ORIGIN_left_rotator": 1,
+   "H01_DESIGN_J_left_rotator": 1,
+   "H01_DESIGN_ORIGIN_left_tool": 1,
+   "H01_DESIGN_J_left_tool": 1,
+   "H01_COORD_Actual_Tip": 1,
+   "H01_CUT_TCP_Left": 1,
+   "H01_DESIGN_ORIGIN_left_bottom_extender_joint": 1,
+   "H01_DESIGN_J_left_bottom_extender_joint": 1,
+   "H01_DESIGN_ORIGIN_left_bottom_extender_link_pivot": 1,
+   "H01_DESIGN_J_left_bottom_extender_link_pivot": 1,
+   "H01_DESIGN_VIS_left_bottom_extender_link": 1,
+   "H01_DESIGN_ORIGIN_left_grabber_joint": 1,
+   "H01_DESIGN_J_left_grabber_joint": 1,
+   "H01_DESIGN_VIS_left_grabber_link": 1,
+   "H01_PIN_left_grab_front": 1,
+   "H01_DESIGN_ORIGIN_left_scissors": 1,
+   "H01_DESIGN_J_left_scissors": 1,
+   "H01_DESIGN_VIS_left_short_blade": 1,
+   "H01_PIN_left_cut_front": 1,
+   "H01_DESIGN_ORIGIN_left_top_extender_joint": 1,
+   "H01_DESIGN_J_left_top_extender_joint": 1,
+   "H01_DESIGN_ORIGIN_left_top_extender_link_pivot": 1
+  }
+ },
+ "inspect_seconds": 0.05
+}
