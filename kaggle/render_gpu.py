@@ -11,7 +11,7 @@ from pathlib import Path
 BLENDER_URL = "https://download.blender.org/release/Blender5.3/blender-5.3.0-linux-x64.tar.xz"
 REPO = "https://github.com/androtschii/Harvix.git"
 BRANCH = "feat/gpu-bench"
-ASSETS = Path("/kaggle/input/harvix-assets")
+INPUT = Path("/kaggle/input")
 WORK = Path("/kaggle/working")
 TMP = Path("/tmp/harvix")
 
@@ -41,7 +41,10 @@ def main():
     repo = TMP / "repo"
     shutil.rmtree(repo, ignore_errors=True)
     sh(["git", "clone", "-q", "--depth", "1", "-b", BRANCH, REPO, str(repo)])
-    for f in ASSETS.iterdir():
+    # The mount path of attached datasets differs between Kaggle versions; locate by file name.
+    assets = next(INPUT.rglob("Harvix_Greenhouse.blend")).parent
+    print(f"[runner] assets at {assets}", flush=True)
+    for f in assets.iterdir():
         target = repo / "assets" / f.name
         if not target.exists():
             target.symlink_to(f)

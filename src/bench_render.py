@@ -79,7 +79,7 @@ def main():
         scene.cycles.use_denoising = True
         scene.cycles.denoiser = "OPTIX" if args.device == "OPTIX" else "OPENIMAGEDENOISE"
 
-    out = Path(args.out_dir)
+    out = Path(args.out_dir).resolve()  # bpy resolves relative render paths against the drive root
     out.mkdir(parents=True, exist_ok=True)
     times = []
     for i in range(args.frames):
