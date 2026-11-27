@@ -1,0 +1,488 @@
+{
+ "file": "C:\\Users\\User01\\Desktop\\Harvix\\assets\\Harvix_Robot.blend",
+ "blender": "5.3.0",
+ "scene": "Harvix Robot",
+ "render": {
+  "engine": "CYCLES",
+  "resolution": [
+   3840,
+   2160
+  ],
+  "percentage": 50,
+  "camera": "CAM_Hero_34",
+  "frame_range": [
+   1,
+   1
+  ]
+ },
+ "counts": {
+  "objects": 133,
+  "by_type": {
+   "CAMERA": 7,
+   "MESH": 43,
+   "EMPTY": 80,
+   "LIGHT": 3
+  },
+  "meshes": 71,
+  "materials": 36,
+  "collections": 5,
+  "node_groups": 36,
+  "images": 63
+ },
+ "collections": {
+  "name": "Scene Collection",
+  "objects": 0,
+  "all_objects": 133,
+  "types": {},
+  "children": [
+   {
+    "name": "FIN_ROBOT",
+    "objects": 0,
+    "all_objects": 118,
+    "types": {},
+    "children": [
+     {
+      "name": "ROBOT_V3",
+      "objects": 118,
+      "all_objects": 118,
+      "types": {
+       "MESH": 40,
+       "EMPTY": 78
+      }
+     }
+    ]
+   },
+   {
+    "name": "ROBOT_V3_CRATES",
+    "objects": 4,
+    "all_objects": 4,
+    "types": {
+     "EMPTY": 2,
+     "MESH": 2
+    }
+   },
+   {
+    "name": "STUDIO",
+    "objects": 4,
+    "all_objects": 4,
+    "types": {
+     "MESH": 1,
+     "LIGHT": 3
+    }
+   },
+   {
+    "name": "CAMERAS",
+    "objects": 7,
+    "all_objects": 7,
+    "types": {
+     "CAMERA": 7
+    }
+   }
+  ]
+ },
+ "object_name_patterns": {
+  "CAM_Detail_Tool": 1,
+  "CAM_Front": 1,
+  "CAM_Hero": 1,
+  "CAM_Low_Hero": 1,
+  "CAM_Rear": 1,
+  "CAM_Side_Arms": 1,
+  "CAM_Top": 1,
+  "COORD_Actual_Tip": 1,
+  "CUT_TCP_Left": 1,
+  "CUT_TCP_Right": 1,
+  "DESIGN_J_left_bottom_extender_joint": 1,
+  "DESIGN_J_left_bottom_extender_link_pivot": 1,
+  "DESIGN_J_left_camera": 1,
+  "DESIGN_J_left_elbow": 1,
+  "DESIGN_J_left_fingers": 1,
+  "DESIGN_J_left_grabber_joint": 1,
+  "DESIGN_J_left_lift": 1,
+  "DESIGN_J_left_pusher": 1,
+  "DESIGN_J_left_rotator": 1,
+  "DESIGN_J_left_scissors": 1,
+  "DESIGN_J_left_shoulder": 1,
+  "DESIGN_J_left_tool": 1,
+  "DESIGN_J_left_top_extender_joint": 1,
+  "DESIGN_J_left_top_extender_link_pivot": 1,
+  "DESIGN_J_left_wheel": 1,
+  "DESIGN_J_left_wrist": 1,
+  "DESIGN_J_rail_joint": 1,
+  "DESIGN_J_right_bottom_extender_joint": 1,
+  "DESIGN_J_right_bottom_extender_link_pivot": 1,
+  "DESIGN_J_right_camera": 1,
+  "DESIGN_J_right_elbow": 1,
+  "DESIGN_J_right_fingers": 1,
+  "DESIGN_J_right_grabber_joint": 1,
+  "DESIGN_J_right_lift": 1,
+  "DESIGN_J_right_pusher": 1,
+  "DESIGN_J_right_rotator": 1,
+  "DESIGN_J_right_scissors": 1,
+  "DESIGN_J_right_shoulder": 1,
+  "DESIGN_J_right_tool": 1,
+  "DESIGN_J_right_top_extender_joint": 1
+ },
+ "keyword_object_patterns": {
+  "DESIGN_J_rail_joint": 1,
+  "DESIGN_ORIGIN_rail_joint": 1
+ },
+ "cameras": {
+  "CAM_Detail_Tool": {
+   "type": "CAMERA",
+   "parent": null,
+   "location": [
+    1.7127,
+    -1.5999,
+    1.979
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_Front": {
+   "type": "CAMERA",
+   "parent": null,
+   "location": [
+    7.837,
+    -0.0004,
+    1.6374
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_Hero_34": {
+   "type": "CAMERA",
+   "parent": null,
+   "location": [
+    6.0243,
+    -4.8449,
+    2.4561
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_Low_Hero": {
+   "type": "CAMERA",
+   "parent": null,
+   "location": [
+    4.3001,
+    -2.3172,
+    0.8425
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_Rear_34": {
+   "type": "CAMERA",
+   "parent": null,
+   "location": [
+    -5.7943,
+    4.9697,
+    2.8655
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_Side_Arms": {
+   "type": "CAMERA",
+   "parent": null,
+   "location": [
+    -0.0059,
+    -7.4229,
+    1.6328
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "CAM_Top": {
+   "type": "CAMERA",
+   "parent": null,
+   "location": [
+    -0.0005,
+    -0.0004,
+    8.4006
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "lights": {
+  "LIGHT_fill": {
+   "type": "LIGHT",
+   "parent": null,
+   "location": [
+    -2.5,
+    -4.0,
+    1.8
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": "AREA",
+   "energy": 250.0
+  },
+  "LIGHT_key": {
+   "type": "LIGHT",
+   "parent": null,
+   "location": [
+    3.6,
+    -3.2,
+    3.6
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": "AREA",
+   "energy": 900.0
+  },
+  "LIGHT_rim": {
+   "type": "LIGHT",
+   "parent": null,
+   "location": [
+    -2.8,
+    3.2,
+    3.8
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "light": "AREA",
+   "energy": 700.0
+  }
+ },
+ "world": "STUDIO_world",
+ "instancers": {
+  "count": 0,
+  "collections": {}
+ },
+ "geometry_nodes_objects": {},
+ "node_groups": [
+  "Bsdf",
+  "Carbon Fiber",
+  "Carbon Fiber Shader",
+  "Color Ramp",
+  "Curated Principle Shader V2.004",
+  "Edge Wear",
+  "Edge Wear Plastic",
+  "Edge wear.001",
+  "Frensel.001",
+  "Fresnel",
+  "Fresnel.001",
+  "Glass Noise Reduction",
+  "Glass Noise Reduction.001",
+  "Input Color Ramp.001",
+  "Input Color Ramp.002",
+  "Main Color",
+  "Mapping Ver. 2",
+  "Micro Roughness",
+  "Micro Roughness.001",
+  "Micro Roughness.002",
+  "NodeGroup.003",
+  "Normal Conversion.004",
+  "Pealed Color",
+  "Reflection",
+  "Reflection.001",
+  "Reflection.002",
+  "Roughness Control",
+  "Roughness Mask",
+  "Scatter.001",
+  "Scratshes",
+  "Screen",
+  "Screen.001",
+  "small Details Bumb",
+  "UV Scaling and Rotation.004",
+  "Vector.001",
+  "Worn Mask"
+ ],
+ "materials": {
+  "Aluminum": 2,
+  "Brushed Aluminum": 2,
+  "Die-cast aluminum": 2,
+  "Screen": 2,
+  "#bfbfbfff": 1,
+  "Aluminum_Engraved_v2": 1,
+  "AR3DMat PBR Brushed Aluminum": 1,
+  "Black plastic": 1,
+  "Black steel": 1,
+  "Brass": 1,
+  "Carbon Fiber 03": 1,
+  "Carbon Fiber Procedural": 1,
+  "Carbon FIber Shader": 1,
+  "COORD tip and titles": 1,
+  "Dark Steel": 1,
+  "DESIGN cut": 1,
+  "DESIGN grab": 1,
+  "DESIGN left": 1,
+  "DESIGN right": 1,
+  "DESIGN rod": 1,
+  "DESIGN steel": 1,
+  "Edge Wear Plastic (Worn Green Plastic)": 1,
+  "Frozen white metal": 1,
+  "Glass": 1,
+  "Harvix harvest crate": 1,
+  "HV_status_light": 1,
+  "ID_DECAL_Ink": 1,
+  "ID_DECAL_Label": 1,
+  "Leather Fabric - Black 70": 1,
+  "Metal": 1,
+  "STUDIO_floor": 1,
+  "White fabric": 1
+ },
+ "keyword_samples": {
+  "DESIGN_J_rail_joint": {
+   "type": "EMPTY",
+   "parent": "DESIGN_ORIGIN_rail_joint",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "DESIGN_ORIGIN_rail_joint": {
+   "type": "EMPTY",
+   "parent": "HV_ROOT",
+   "location": [
+    0.0,
+    0.0,
+    0.16
+   ],
+   "dimensions": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "root": {
+  "location": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "rotation_euler": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "custom_props": {
+   "q_left_elbow": 0.0,
+   "q_left_fingers": 0.0,
+   "q_left_grabber_joint": 0.0,
+   "q_left_lift": 0.0,
+   "q_left_pusher": 0.0,
+   "q_left_rotator": 0.0,
+   "q_left_scissors": 0.0,
+   "q_left_shoulder": 0.0,
+   "q_left_tool": 0.0,
+   "q_left_wrist": 0.0,
+   "q_rail_joint": 0.0,
+   "q_right_elbow": 0.0,
+   "q_right_fingers": 0.0,
+   "q_right_grabber_joint": 0.0,
+   "q_right_lift": 0.0,
+   "q_right_pusher": 0.0,
+   "q_right_rotator": 0.0,
+   "q_right_scissors": 0.0,
+   "q_right_shoulder": 0.0,
+   "q_right_tool": 0.0,
+   "q_right_wrist": 0.0,
+   "hv_drive_distance": 0.0,
+   "hv_robot_id": "H01",
+   "hv_status": "green",
+   "hv_status_rgb": "[0.05, 1.0, 0.12, 12.0]",
+   "hv_joint_limits": "{\"left_elbow\": {\"lower\": -2.3, \"upper\": 2.3, \"kind\": \"revolute\", \"velocity\": 1.57, \"acceleration\": 3.0}, \"left_fingers\": {\"lower\": -1.1, \"upper\": 1.1, \"kind\": \"revolute\", \"velocity\": 1.0, \"acceleration\": 2.0}, \"left_grabber_joint\": {\"lower\": 0.0, \"upper\": 0.8, \"kind\": \"revolute\", \"velocity\": 2.0, \"acceleration\": 4.0}, \"left_lift\": {\"lower\": -0.73, \"upper\": 0.8, \"kind\": \"prismatic\", \"velocity\": 0.2, \"acceleration\": 0.5}, \"left_pusher\": {\"lower\": 0.0, \"upper\": 0.3, \"kind\": \"prismatic\", \"velocity\": 0.3, \"acceleration\": 1.0}, \"left_rotator\": {\"lower\": -3.141592653589793, \"upper\": 3.141592653589793, \"kind\": \"continuous\", \"velocity\": 5.0, \"acceleration\": 10.0}, \"left_scissors\": {\"lower\": 0.0, \"upper\": 0.8, \"kind\": \"revolute\", \"velocity\": 2.0, \"acceleration\": 4.0}, \"left_shoulder\": {\"lower\": -1.66, \"upper\": 1.66, \"kind\": \"revolute\", \"velocity\": 1.57, \"acceleration\": 3.0}, \"left_tool\": {\"lower\": 0.0, \"upper\": 0.1, \"kind\": \"prismatic\", \"velocity\": 0.12, \"acceleration\": 0.25}, \"left_wrist\": {\"lower\": -3.14, \"upper\": 3.14159, \"kind\": \"revolute\", \"velocity\": 1.57, \"acceleration\": 3.0}, \"rail_joint\": {\"lower\": -5.0, \"upper\": 5.0, \"kind\": \"prismatic\", \"velocity\": 0.5, \"acceleration\": 1.0}, \"right_elbow\": {\"lower\": -2.3, \"upper\": 2.3, \"kind\": \"revolute\", \"velocity\": 1.57, \"acceleration\": 3.0}, \"right_fingers\": {\"lower\": -1.1, \"upper\": 1.1, \"kind\": \"revolute\", \"velocity\": 1.0, \"acceleration\": 2.0}, \"right_grabber_joint\": {\"lower\": 0.0, \"upper\": 0.8, \"kind\": \"revolute\", \"velocity\": 2.0, \"acceleration\": 4.0}, \"right_lift\": {\"lower\": -0.73, \"upper\": 0.8, \"kind\": \"prismatic\", \"velocity\": 0.2, \"acceleration\": 0.5}, \"right_pusher\": {\"lower\": 0.0, \"upper\": 0.3, \"kind\": \"prismatic\", \"velocity\": 0.3, \"acceleration\": 1.0}, \"right_rotator\": {\"lower\": -3.141592653589793, \"upper\": 3.141592653589793, \"kind\": \"continuous\", \"velocity\": 5.0, \"acceleration\": 10.0}, \"right_scissors\": {\"lower\": 0.0, \"upper\": 0.8, \"kind\": \"revolute\", \"velocity\": 2.0, \"acceleration\": 4.0}, \"right_shoulder\": {\"lower\": -1.66, \"upper\": 1.66, \"kind\": \"revolute\", \"velocity\": 1.57, \"acceleration\": 3.0}, \"right_tool\": {\"lower\": 0.0, \"upper\": 0.1, \"kind\": \"prismatic\", \"velocity\": 0.12, \"acceleration\": 0.25}, \"right_wrist\": {\"lower\": -3.14, \"upper\": 3.14159, \"kind\": \"revolute\", \"velocity\": 1.57, \"acceleration\": 3.0}}",
+   "hv_joint_names": "[\"left_elbow\", \"left_fingers\", \"left_grabber_joint\", \"left_lift\", \"left_pusher\", \"left_rotator\", \"left_scissors\", \"left_shoulder\", \"left_tool\", \"left_wrist\", \"rail_joint\", \"right_elbow\", \"right_fingers\", \"right_grabber_joint\", \"right_lift\", \"right_pusher\", \"right_rotator\", \"right_scissors\", \"right_shoulder\", \"right_tool\", \"right_wrist\"]",
+   "hv_ground_offset_m": 0.16000071716983666,
+   "hv_lod": "hero",
+   "hv_poses": "{\"neutral\": {\"left_elbow\": 0.0, \"left_fingers\": 0.0, \"left_grabber_joint\": 0.0, \"left_lift\": 0.0, \"left_pusher\": 0.0, \"left_rotator\": 0.0, \"left_scissors\": 0.0, \"left_shoulder\": 0.0, \"left_tool\": 0.0, \"left_wrist\": 0.0, \"rail_joint\": 0.0, \"right_elbow\": 0.0, \"right_fingers\": 0.0, \"right_grabber_joint\": 0.0, \"right_lift\": 0.0, \"right_pusher\": 0.0, \"right_rotator\": 0.0, \"right_scissors\": 0.0, \"right_shoulder\": 0.0, \"right_tool\": 0.0, \"right_wrist\": 0.0}, \"stow\": {\"left_shoulder\": -1.6, \"left_elbow\": 2.3, \"left_wrist\": -2.25, \"left_fingers\": -1.0, \"left_pusher\": 0.0, \"left_rotator\": 0.0, \"left_lift\": -0.73, \"right_shoulder\": -1.6, \"right_elbow\": 2.3, \"right_wrist\": 2.25, \"right_fingers\": -1.0, \"right_pusher\": 0.0, \"right_rotator\": 0.0, \"right_lift\": -0.73, \"left_grabber_joint\": 0.0, \"left_scissors\": 0.0, \"right_grabber_joint\": 0.0, \"right_scissors\": 0.0}}",
+   "hv_library_version": "v3.0",
+   "hv_source_sha256": "e25b1a33c0b955867b6a5ae0aba0fbab2589fd603ee531e61866fa88d3c367eb",
+   "hv_contacts": "[{\"name\": \"drive_L\", \"kind\": \"drive\", \"x\": 0.006537322886288166, \"y\": 0.20162499858997762, \"bottom_z\": 7.181322073668284e-07, \"half_width\": 0.03789128888243244, \"radius\": 0.12700000405311584}, {\"name\": \"drive_R\", \"kind\": \"drive\", \"x\": 0.006537321954965591, \"y\": -0.20162488888499763, \"bottom_z\": -5.490378041095312e-09, \"half_width\": 0.03789160269450678, \"radius\": 0.12700000777840614}, {\"name\": \"caster_FL\", \"kind\": \"caster\", \"x\": 0.73356, \"y\": 0.3725, \"bottom_z\": 0.005039304494857788, \"half_width\": 0.023499995470046997, \"radius\": 0.06245378963649273}, {\"name\": \"caster_FR\", \"kind\": \"caster\", \"x\": 0.73356, \"y\": -0.3725, \"bottom_z\": 0.005039304494857788, \"half_width\": 0.023499995470046997, \"radius\": 0.06245378963649273}, {\"name\": \"caster_RL\", \"kind\": \"caster\", \"x\": -0.66144, \"y\": 0.3725, \"bottom_z\": 0.005039304494857788, \"half_width\": 0.023499995470046997, \"radius\": 0.06245378963649273}, {\"name\": \"caster_RR\", \"kind\": \"caster\", \"x\": -0.66144, \"y\": -0.3725, \"bottom_z\": 0.005039304494857788, \"half_width\": 0.023499995470046997, \"radius\": 0.06245378963649273}, {\"name\": \"roller_FL\", \"kind\": \"roller\", \"x\": 0.50676, \"y\": 0.275, \"bottom_z\": 0.10750000000000001, \"half_width\": 0.0325, \"radius\": 0.022, \"flange_radius\": 0.035, \"groove\": \"V/U groove 55 mm wide, root radius 22 mm, flanges 35 mm; seats a 51 mm pipe at the groove root\"}, {\"name\": \"roller_FR\", \"kind\": \"roller\", \"x\": 0.50676, \"y\": -0.275, \"bottom_z\": 0.10750000000000001, \"half_width\": 0.0325, \"radius\": 0.022, \"flange_radius\": 0.035, \"groove\": \"V/U groove 55 mm wide, root radius 22 mm, flanges 35 mm; seats a 51 mm pipe at the groove root\"}, {\"name\": \"roller_RL\", \"kind\": \"roller\", \"x\": -0.49368, \"y\": 0.275, \"bottom_z\": 0.10750000000000001, \"half_width\": 0.0325, \"radius\": 0.022, \"flange_radius\": 0.035, \"groove\": \"V/U groove 55 mm wide, root radius 22 mm, flanges 35 mm; seats a 51 mm pipe at the groove root\"}, {\"name\": \"roller_RR\", \"kind\": \"roller\", \"x\": -0.49368, \"y\": -0.275, \"bottom_z\": 0.10750000000000001, \"half_width\": 0.0325, \"radius\": 0.022, \"flange_radius\": 0.035, \"groove\": \"V/U groove 55 mm wide, root radius 22 mm, flanges 35 mm; seats a 51 mm pipe at the groove root\"}, {\"name\": \"spool_L\", \"kind\": \"spool\", \"x\": 0.006537321954965591, \"y\": 0.2755, \"bottom_z\": 0.10547357988912477, \"radius\": 0.021526420110875234, \"half_width\": 0.015, \"flange_radius\": 0.0375, \"flange_inner_dy\": 0.031, \"note\": \"drive-axle rail spool (same axle as the tyre): carries on the pipes, tyres lifted\"}, {\"name\": \"spool_R\", \"kind\": \"spool\", \"x\": 0.006537321954965591, \"y\": -0.2755, \"bottom_z\": 0.1054740054155687, \"radius\": 0.021525994584431298, \"half_width\": 0.015, \"flange_radius\": 0.0375, \"flange_inner_dy\": 0.031, \"note\": \"drive-axle rail spool (same axle as the tyre): carries on the pipes, tyres lifted\"}]",
+   "hv_wheel_extra": 0.0,
+   "hv_support": "floor",
+   "hv_config": "harvest",
+   "hv_v3_notes": "V3-02: V3-01 carriage fix + ID decal, separated rollers/casters (spin from hv_drive_distance), strap sockets, contacts"
+  },
+  "descendants": 121,
+  "descendant_types": {
+   "EMPTY": 79,
+   "MESH": 42
+  },
+  "descendants_with_drivers": 170,
+  "descendant_cameras": [],
+  "descendant_name_patterns": {
+   "DESIGN_ORIGIN_rail_joint": 1,
+   "DESIGN_J_rail_joint": 1,
+   "DESIGN_LINK_base_link": 1,
+   "DESIGN_ORIGIN_left_lift": 1,
+   "DESIGN_J_left_lift": 1,
+   "DESIGN_ORIGIN_left_shoulder": 1,
+   "DESIGN_J_left_shoulder": 1,
+   "DESIGN_ORIGIN_left_elbow": 1,
+   "DESIGN_J_left_elbow": 1,
+   "DESIGN_ORIGIN_left_wrist": 1,
+   "DESIGN_J_left_wrist": 1,
+   "DESIGN_ORIGIN_left_fingers": 1,
+   "DESIGN_J_left_fingers": 1,
+   "DESIGN_ORIGIN_left_camera": 1,
+   "DESIGN_J_left_camera": 1,
+   "DESIGN_VIS_left_camera": 1,
+   "DESIGN_ORIGIN_left_pusher": 1,
+   "DESIGN_J_left_pusher": 1,
+   "DESIGN_ORIGIN_left_rotator": 1,
+   "DESIGN_J_left_rotator": 1,
+   "DESIGN_ORIGIN_left_tool": 1,
+   "DESIGN_J_left_tool": 1,
+   "COORD_Actual_Tip": 1,
+   "CUT_TCP_Left": 1,
+   "DESIGN_ORIGIN_left_bottom_extender_joint": 1,
+   "DESIGN_J_left_bottom_extender_joint": 1,
+   "DESIGN_ORIGIN_left_bottom_extender_link_pivot": 1,
+   "DESIGN_J_left_bottom_extender_link_pivot": 1,
+   "DESIGN_VIS_left_bottom_extender_link": 1,
+   "DESIGN_ORIGIN_left_grabber_joint": 1,
+   "DESIGN_J_left_grabber_joint": 1,
+   "DESIGN_VIS_left_grabber_link": 1,
+   "PIN_left_grab_front": 1,
+   "DESIGN_ORIGIN_left_scissors": 1,
+   "DESIGN_J_left_scissors": 1,
+   "DESIGN_VIS_left_short_blade": 1,
+   "PIN_left_cut_front": 1,
+   "DESIGN_ORIGIN_left_top_extender_joint": 1,
+   "DESIGN_J_left_top_extender_joint": 1,
+   "DESIGN_ORIGIN_left_top_extender_link_pivot": 1
+  }
+ },
+ "inspect_seconds": 0.01
+}
