@@ -62,6 +62,19 @@ COCO-style JSON for 2D labels (masks as RLE), plus one `metadata.jsonl` line per
 camera matrices, joint values, robot pose and all random draws. PNG for RGB and masks, 16-bit PNG depth in
 millimetres (no EXR, so any tool can read it).
 
+## D7. Prior art: reuse ideas, not dependencies
+
+- **BlenderProc** (DLR): runs its own bundled Blender (3.x/4.x); no 5.x support found, and our `.blend` files
+  need 5.2+. Its strength (assembling random scenes) is not needed, the scene is given. Not used.
+- **bpycv**: instance masks via `pass_index` plus depth, the same approach as D3. Supports Blender up to 4.x and
+  installs into Blender's Python, so it is not a dependency; the idea is reused with plain `bpy`.
+- **Barth et al., synthetic sweet pepper in Blender** (WUR): closest precedent, with peduncle segmentation and a
+  real harvesting robot. Shows the plant-part labelling is worth it.
+- **Tomato-sim** (Isaac Sim Replicator, amodal tomato segmentation) and a UE5 procedural tomato greenhouse:
+  same crop, other engines.
+- **Real tomato peduncle segmentation set** (Roboflow Universe): candidate real-image test set for the
+  sim-to-real check in the validation plan.
+
 ## Open questions (would ask the stakeholder; assumed for now)
 
 - Real camera model and mount. Assumed as in D2.
