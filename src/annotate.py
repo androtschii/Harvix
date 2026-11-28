@@ -39,6 +39,7 @@ RIPE_THRESHOLD = 0.8
 RIPE_OFFSET = 0.1  # per-truss spread around the sample-wide shift
 FRUIT_MAT, STALK_MAT = 0, 1
 PLANT_MATCH_M = 0.05
+CUT_VISIBLE_TOL_M = 0.03  # depth vs cut-point z; peduncles are ~5 mm thick
 
 
 # ---------- pure helpers ----------
@@ -121,6 +122,22 @@ def ripeness(template_mean: float, shift: float, offset: float) -> float:
     return min(1.0, max(0.0, template_mean + offset + shift))
 
 
+def cut_point_visible(depth_m: np.ndarray, uv, z: float, tol: float = CUT_VISIBLE_TOL_M):
+    """True if the rendered surface at the cut pixel (3x3 window) is the cut point itself.
+
+    None when the point projects outside the image or behind the camera.
+    """
+    if uv is None or z <= 0:
+        return None
+    h, w = depth_m.shape
+    u, v = int(uv[0]), int(uv[1])
+    if not (0 <= u < w and 0 <= v < h):
+        return None
+    win = depth_m[max(v - 1, 0) : v + 2, max(u - 1, 0) : u + 2]
+    win = win[(win > 0) & np.isfinite(win)]
+    return bool(win.size) and bool(np.abs(win - z).min() <= tol)
+
+
 def build_annotations(ids: np.ndarray, trusses: list[dict], image_id: int) -> list[dict]:
     """COCO annotations for trusses with at least one visible pixel."""
     anns = []
@@ -142,6 +159,7 @@ def build_annotations(ids: np.ndarray, trusses: list[dict], image_id: int) -> li
                 "ripeness": round(t["ripeness"], 4),
                 "ripe": t["ripeness"] >= RIPE_THRESHOLD,
                 "cut_point_px": t["cut_point_px"],
+                "cut_point_visible": t.get("cut_point_visible"),
                 "cut_point_cam": t["cut_point_cam"],
                 "center_cam": t["center_cam"],
                 "cut_point_tcp": t["cut_point_tcp"],
@@ -419,7 +437,12 @@ def main(argv: list[str] | None = None) -> None:
         setup_depth_output(out)
         sc.render.filepath = str(out / "rgb.png")
         bpy.ops.render.render(write_still=True)
-        write_png16(out / "depth.png", depth_to_mm16(read_depth_exr(out)))
+        depth_m = read_depth_exr(out)
+        write_png16(out / "depth.png", depth_to_mm16(depth_m))
+        for t in trusses:
+            t["cut_point_visible"] = cut_point_visible(
+                depth_m, t["cut_point_px"], t["cut_point_cam"][2]
+            )
     ids = render_id_pass(trusses, out / "mask.png")
 
     anns = build_annotations(ids, trusses, image_id=args.seed)
