@@ -6,6 +6,7 @@ Push with:  kaggle kernels push -p kaggle
 
 import shutil
 import subprocess
+import threading
 from pathlib import Path
 
 BLENDER_URL = "https://download.blender.org/release/Blender5.3/blender-5.3.0-linux-x64.tar.xz"
@@ -16,9 +17,11 @@ WORK = Path("/kaggle/working")
 TMP = Path("/tmp/harvix")
 
 RUNS = {
-    "bench_optix": ["src/bench_render.py", "--device", "OPTIX", "--frames", "3"],
     "bench_cuda": ["src/bench_render.py", "--device", "CUDA", "--frames", "3"],
+    "bench_optix": ["src/bench_render.py", "--device", "OPTIX", "--frames", "3"],
 }
+# A hung render otherwise burns the whole 12 h GPU session (seen three times).
+RUN_TIMEOUT_S = 20 * 60
 
 
 def sh(cmd, **kw):
@@ -53,16 +56,24 @@ def main():
         out = WORK / name
         cmd = [str(blender), "-b", "assets/Harvix_Greenhouse.blend", "--python", script, "--"]
         cmd += [*args, "--out-dir", str(out)]
-        log = (WORK / f"{name}.log").open("w")
-        try:
-            sh(cmd, cwd=repo, stdout=log, stderr=subprocess.STDOUT)
-        except subprocess.CalledProcessError as e:
-            print(f"[runner] {name} failed: {e}", flush=True)
-        finally:
-            log.close()
-        for line in (WORK / f"{name}.log").read_text(errors="replace").splitlines():
-            if line.startswith("[bench]") or "Error" in line:
-                print(line, flush=True)
+        print("$", " ".join(cmd), flush=True)
+        # Stream Blender's output into the kernel log: a cancelled kernel keeps no output files.
+        with (WORK / f"{name}.log").open("w") as log:
+            proc = subprocess.Popen(
+                cmd, cwd=repo, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True
+            )
+            timer = threading.Timer(RUN_TIMEOUT_S, proc.kill)
+            timer.start()
+            for line in proc.stdout:
+                log.write(line)
+                print(line, end="", flush=True)
+            timer.cancel()
+            code = proc.wait()
+        if code != 0:
+            print(
+                f"[runner] {name} exited with {code} (killed after {RUN_TIMEOUT_S} s if -9)",
+                flush=True,
+            )
 
 
 if __name__ == "__main__":

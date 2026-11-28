@@ -81,13 +81,14 @@ def main():
 
     out = Path(args.out_dir).resolve()  # bpy resolves relative render paths against the drive root
     out.mkdir(parents=True, exist_ok=True)
+    print(f"[bench] devices {devices}, rendering {args.frames} frames", flush=True)
     times = []
     for i in range(args.frames):
         scene.render.filepath = str(out / f"frame_{i:03d}.png")
         t0 = time.perf_counter()
         bpy.ops.render.render(write_still=True)
         times.append(round(time.perf_counter() - t0, 2))
-        print(f"[bench] frame {i}: {times[-1]} s")
+        print(f"[bench] frame {i}: {times[-1]} s", flush=True)
 
     report = {
         "blender": bpy.app.version_string,
@@ -106,7 +107,7 @@ def main():
         "peak_rss_gb": peak_rss_gb(),
     }
     (out / "bench.json").write_text(json.dumps(report, indent=1), encoding="utf-8")
-    print("[bench] " + json.dumps(report))
+    print("[bench] " + json.dumps(report), flush=True)
 
 
 if __name__ == "__main__":
