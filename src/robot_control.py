@@ -33,17 +33,12 @@ def joint_names(spec: dict) -> list[str]:
 
 
 def validate_pose(pose: dict, spec: dict) -> None:
-    """Validate that pose joints exist and values are finite numbers within limits."""
-    limits = spec["joint_limits"]
-    for joint, val in pose.items():
-        if joint not in limits:
-            raise ValueError(f"Unknown joint '{joint}'. Known joints: {sorted(limits.keys())}")
-        if isinstance(val, bool) or not isinstance(val, (int, float)) or math.isnan(val):
-            raise ValueError(f"Joint '{joint}' value must be a valid number, got {val!r}")
-        lower = limits[joint]["lower"]
-        upper = limits[joint]["upper"]
-        if val < lower or val > upper:
-            raise ValueError(f"Joint '{joint}' value {val} is outside limits [{lower}, {upper}]")
+    """Raise ValueError unless every joint exists and its value is a number within limits."""
+    _, outside = clamp_pose(pose, spec)
+    if outside:
+        joint = outside[0]
+        lo, hi = spec["joint_limits"][joint]["lower"], spec["joint_limits"][joint]["upper"]
+        raise ValueError(f"Joint '{joint}' value {pose[joint]} is outside limits [{lo}, {hi}]")
 
 
 def clamp_pose(pose: dict, spec: dict) -> tuple[dict, list[str]]:
@@ -80,35 +75,12 @@ def preset(name: str, spec: dict) -> dict:
     return full_pose
 
 
-def snap_lane(x: float) -> int:
-    """Snap x coordinate to the nearest rail lane.
-
-    Ties are resolved to the lower lane; values outside bounds snap to the nearest boundary.
-    """
-    if isinstance(x, bool) or not isinstance(x, (int, float)) or math.isnan(x):
-        raise ValueError(f"Invalid lane coordinate: {x!r}")
-    return int(min(RAIL_LANES, key=lambda lane: (abs(lane - x), lane)))
-
-
 def validate_lane(x: float) -> None:
     """Validate that x is within 1e-6 tolerance of a rail lane."""
     if isinstance(x, bool) or not isinstance(x, (int, float)) or math.isnan(x):
         raise ValueError(f"Lane coordinate must be a valid number, got {x!r}")
     if not any(abs(x - lane) <= 1e-6 for lane in RAIL_LANES):
         raise ValueError(f"Lane {x} is not one of the valid rail lanes {RAIL_LANES}")
-
-
-def pose_to_props(
-    pose: dict,
-    spec: dict | str | None = None,
-    prefix: str = "q_",
-) -> dict:
-    """Return dictionary with prefixed keys for Blender custom properties."""
-    if isinstance(spec, str):
-        prefix = spec
-    elif isinstance(spec, dict) and "joint_property_prefix" in spec:
-        prefix = spec["joint_property_prefix"]
-    return {f"{prefix}{k}": v for k, v in pose.items()}
 
 
 def apply_pose(root, pose: dict, spec: dict, strict: bool = True) -> dict:
@@ -125,11 +97,36 @@ def apply_pose(root, pose: dict, spec: dict, strict: bool = True) -> dict:
     for joint, val in target_pose.items():
         root[f"{prefix}{joint}"] = val
 
-    # Writing an ID property from Python does not tag the object, so without this
-    # view_layer.update() skips the drivers and the robot silently stays put.
-    root.update_tag()
-    bpy.context.view_layer.update()
-    return target_pose
+    # Writing an ID property from Python tags nothing, and tagging only the root still leaves
+    # some joint drivers stale in about one run in four (seen on seed 5: right_fingers kept its
+    # old value while the render, which rebuilds the scene, used the new one). Tag every part and
+    # check the joints' driven values, so labels are never computed for a pose we don't render.
+    stale = []
+    for _ in range(3):
+        root.update_tag()
+        for ob in root.children_recursive:
+            ob.update_tag()
+        bpy.context.view_layer.update()
+        stale = stale_joints(root, target_pose)
+        if not stale:
+            return target_pose
+    raise RuntimeError(f"Joint drivers did not settle: {stale}")
+
+
+def stale_joints(root, pose: dict, tol: float = 1e-6) -> list[str]:
+    """Joints whose evaluated `hv_q` on the joint link differs from the requested value."""
+    import bpy
+
+    dg = bpy.context.evaluated_depsgraph_get()
+    prefix = "" if root.name == "HV_ROOT" else f"{root.name}_"  # robot file vs greenhouse
+    stale = []
+    for joint, val in pose.items():
+        link = bpy.data.objects.get(f"{prefix}DESIGN_J_{joint}")
+        if link is None or "hv_q" not in link:
+            continue
+        if abs(link.evaluated_get(dg)["hv_q"] - val) > tol:
+            stale.append(joint)
+    return stale
 
 
 def read_pose(root, spec: dict) -> dict:

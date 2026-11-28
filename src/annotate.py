@@ -142,6 +142,7 @@ def build_annotations(ids: np.ndarray, trusses: list[dict], image_id: int) -> li
     """COCO annotations for trusses with at least one visible pixel."""
     anns = []
     for t in trusses:
+        ripeness_r = round(t["ripeness"], 4)  # the flag must agree with the stored value
         mask = ids == t["id"]
         area = int(mask.sum())
         t["visible_px"] = area
@@ -150,14 +151,15 @@ def build_annotations(ids: np.ndarray, trusses: list[dict], image_id: int) -> li
         anns.append(
             {
                 "id": image_id * 1000 + t["id"],
+                "truss_id": t["id"],
                 "image_id": image_id,
                 "category_id": 1,
                 "iscrowd": 0,
                 "area": area,
                 "bbox": bbox_xywh(mask),
                 "segmentation": rle_encode(mask),
-                "ripeness": round(t["ripeness"], 4),
-                "ripe": t["ripeness"] >= RIPE_THRESHOLD,
+                "ripeness": ripeness_r,
+                "ripe": ripeness_r >= RIPE_THRESHOLD,
                 "cut_point_px": t["cut_point_px"],
                 "cut_point_visible": t.get("cut_point_visible"),
                 "cut_point_cam": t["cut_point_cam"],
@@ -468,6 +470,10 @@ def main(argv: list[str] | None = None) -> None:
             "world_from_cam": [list(r) for r in cam.matrix_world],
         },
         "label_radius_m": args.radius,
+        "render": {
+            "samples": None if args.no_rgb else args.samples,
+            "blender": bpy.app.version_string,
+        },
         "trusses": trusses,
     }
     (out / "metadata.json").write_text(json.dumps(meta), encoding="utf-8")

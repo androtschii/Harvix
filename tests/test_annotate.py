@@ -83,6 +83,7 @@ def test_build_annotations():
     ]
     anns = build_annotations(ids, trusses, image_id=7)
     assert [a["id"] for a in anns] == [7001, 7002]
+    assert [a["truss_id"] for a in anns] == [1, 2]
     a1, a2 = anns
     assert (a1["area"], a1["bbox"], a1["ripe"]) == (6, [1, 1, 3, 2], True)
     assert (a2["area"], a2["bbox"], a2["ripe"]) == (1, [6, 4, 1, 1], False)
@@ -136,3 +137,18 @@ def test_cut_point_visible():
     assert cut_point_visible(depth, (12.0, 5.0), 2.0) is None  # outside the image
     assert cut_point_visible(depth, None, 2.0) is None
     assert cut_point_visible(np.zeros((4, 4)), (1, 1), 2.0) is False  # sky only
+
+
+def test_ripe_flag_agrees_with_stored_rounded_value():
+    ids = np.ones((2, 2), dtype=np.int32)
+    t = {
+        "id": 1,
+        "ripeness": 0.79996,
+        "cut_point_px": None,
+        "cut_point_cam": [0, 0, 1],
+        "center_cam": [0, 0, 1],
+        "cut_point_tcp": [0, 0, 0],
+    }
+    (a,) = build_annotations(ids, [t], image_id=1)
+    assert a["ripeness"] == 0.8
+    assert a["ripe"] is True

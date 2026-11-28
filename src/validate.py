@@ -22,6 +22,9 @@ from annotate import RIPE_THRESHOLD, bbox_xywh, decode_ids, rle_decode  # noqa: 
 from robot_control import load_spec, validate_lane, validate_pose  # noqa: E402
 
 MIN_DEPTH_COVER = 0.5  # share of a truss mask that must have a depth value
+# Projected 3D truss centres vs mask box centres, median per image. Occlusion moves single boxes,
+# a camera that differs between labels and render moves all of them (seen: 113 px).
+MAX_CENTER_OFFSET_PX = 15.0
 
 
 def load_dataset(ds: Path) -> tuple[dict, dict[int, dict]]:
@@ -42,7 +45,7 @@ def check_annotation(ann: dict, img: dict, mask_ids: np.ndarray | None) -> list[
         problems.append(f"{where}: area {ann['area']} != RLE area {int(m.sum())}")
     if bbox_xywh(m) != ann["bbox"]:
         problems.append(f"{where}: bbox {ann['bbox']} != RLE bbox {bbox_xywh(m)}")
-    if mask_ids is not None and not (m == (mask_ids == ann["id"] % 1000)).all():
+    if mask_ids is not None and not (m == (mask_ids == ann["truss_id"])).all():
         problems.append(f"{where}: RLE differs from mask.png")
     if not 0.0 <= ann["ripeness"] <= 1.0:
         problems.append(f"{where}: ripeness {ann['ripeness']} outside [0, 1]")
@@ -61,14 +64,32 @@ def check_depth(ann: dict, depth_mm: np.ndarray) -> list[str]:
     return []
 
 
+def check_projection(anns: list[dict], K, image_id: int) -> list[str]:
+    """Labels and image must come from the same camera: compare projected centres with boxes."""
+    offsets = []
+    for a in anns:
+        x, y, z = a["center_cam"]
+        if z <= 0:
+            continue
+        bx, by, bw, bh = a["bbox"]
+        u, v = K[0][0] * x / z + K[0][2], K[1][1] * y / z + K[1][2]
+        offsets.append((u - (bx + bw / 2), v - (by + bh / 2)))
+    if len(offsets) < 3:
+        return []
+    du, dv = np.median(np.array(offsets), axis=0)
+    if float(np.hypot(du, dv)) > MAX_CENTER_OFFSET_PX:
+        return [f"image {image_id}: labels are offset from the image by ({du:+.0f}, {dv:+.0f}) px"]
+    return []
+
+
 def check_meta(seed: int, meta: dict | None, spec: dict) -> list[str]:
     if meta is None:
         return [f"image {seed}: no metadata line"]
     try:
         validate_pose(meta["pose"], spec)
         validate_lane(meta["robot"]["lane_x"])
-    except ValueError as e:
-        return [f"image {seed}: {e}"]
+    except (KeyError, ValueError) as e:
+        return [f"image {seed}: bad metadata ({e!r})"]
     return []
 
 
@@ -183,6 +204,9 @@ def validate(ds: Path, overlays: int = 0) -> tuple[dict, list[str]]:
             if depth is not None:
                 problems += check_depth(a, depth)
         problems += check_meta(img["id"], meta.get(img["id"]), spec)
+        if img["id"] in meta:
+            K = meta[img["id"]]["camera"]["K"]
+            problems += check_projection(by_image[img["id"]], K, img["id"])
         if k < overlays:
             draw_overlay(
                 ds, img, by_image[img["id"]], ds / "overlays" / Path(img["file_name"]).name

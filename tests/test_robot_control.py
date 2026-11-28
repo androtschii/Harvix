@@ -11,10 +11,8 @@ from robot_control import (
     joint_names,
     load_spec,
     place_root,
-    pose_to_props,
     preset,
     read_pose,
-    snap_lane,
     validate_lane,
     validate_pose,
 )
@@ -47,29 +45,6 @@ def test_rail_lanes():
     assert RAIL_LANES[0] == 9
     assert RAIL_LANES[-1] == 91
     assert all(RAIL_LANES[i + 1] - RAIL_LANES[i] == 2 for i in range(len(RAIL_LANES) - 1))
-
-
-def test_snap_lane():
-    assert snap_lane(8) == 9
-    assert snap_lane(8.0) == 9
-    assert snap_lane(9.9) == 9
-    assert snap_lane(10) == 9
-    assert snap_lane(10.0) == 9
-    assert snap_lane(10.1) == 11
-    assert snap_lane(100) == 91
-    assert snap_lane(100.0) == 91
-
-    assert snap_lane(9) == 9
-    assert snap_lane(91) == 91
-    assert snap_lane(12.0) == 11
-    assert snap_lane(14.0) == 13
-
-    with pytest.raises(ValueError):
-        snap_lane(float("nan"))
-    with pytest.raises(ValueError):
-        snap_lane("10")
-    with pytest.raises(ValueError):
-        snap_lane(True)
 
 
 def test_validate_lane():
@@ -187,26 +162,6 @@ def test_preset(spec):
         preset("invalid_preset", spec)
 
 
-def test_pose_to_props(spec):
-    pose = {"left_elbow": 0.5, "right_wrist": -1.0}
-
-    # Default prefix "q_"
-    props_default = pose_to_props(pose)
-    assert props_default == {"q_left_elbow": 0.5, "q_right_wrist": -1.0}
-
-    # Custom prefix parameter
-    props_custom = pose_to_props(pose, prefix="custom_")
-    assert props_custom == {"custom_left_elbow": 0.5, "custom_right_wrist": -1.0}
-
-    # Prefix from spec dictionary
-    props_from_spec = pose_to_props(pose, spec)
-    assert props_from_spec == {"q_left_elbow": 0.5, "q_right_wrist": -1.0}
-
-    # Prefix as string passed positionally
-    props_pos_str = pose_to_props(pose, "p_")
-    assert props_pos_str == {"p_left_elbow": 0.5, "p_right_wrist": -1.0}
-
-
 def test_place_root():
     class MockLocation:
         def __init__(self, x=0.0, y=0.0, z=5.0):
@@ -258,33 +213,66 @@ def test_read_pose(spec):
     assert "hv_status" not in pose
 
 
-def test_apply_pose_with_mock_bpy(monkeypatch, spec):
+class _Tagged(dict):
+    """Stands in for a Blender object: custom props as dict items plus update_tag()."""
+
+    def __init__(self, name, **props):
+        super().__init__(props)
+        self.name = name
+        self.tagged = 0
+        self.children_recursive = []
+
+    def update_tag(self):
+        self.tagged += 1
+
+    def evaluated_get(self, dg):
+        return dg.get(self.name, self)
+
+
+def _mock_bpy(monkeypatch, objects, evaluated=None):
+    """Fake bpy: `evaluated` maps object name -> what the depsgraph returns for it."""
     mock_bpy = types.ModuleType("bpy")
     updated = []
     mock_bpy.context = types.SimpleNamespace(
-        view_layer=types.SimpleNamespace(update=lambda: updated.append(True))
+        view_layer=types.SimpleNamespace(update=lambda: updated.append(True)),
+        evaluated_depsgraph_get=lambda: evaluated or {},
     )
+    mock_bpy.data = types.SimpleNamespace(objects=objects)
     monkeypatch.setitem(sys.modules, "bpy", mock_bpy)
+    return updated
 
-    class Root(dict):
-        tagged = 0
 
-        def update_tag(self):
-            self.tagged += 1
+def test_apply_pose_with_mock_bpy(monkeypatch, spec):
+    link = _Tagged("H01_DESIGN_J_left_elbow", hv_q=0.0)
+    root = _Tagged("H01")
+    root.children_recursive = [link]
+    # The depsgraph reports the driven value that apply_pose asked for.
+    evaluated = {}
+    updated = _mock_bpy(monkeypatch, {link.name: link}, evaluated)
+    evaluated[link.name] = _Tagged(link.name, hv_q=0.5)
 
-    root = Root()
     applied = apply_pose(root, {"left_elbow": 0.5}, spec, strict=True)
     assert applied == {"left_elbow": 0.5}
     assert root["q_left_elbow"] == 0.5
-    assert root.tagged == 1
+    assert (root.tagged, link.tagged) == (1, 1)  # every robot part is tagged, not only the root
     assert len(updated) == 1
 
     # Non-strict clamping
+    evaluated[link.name] = _Tagged(link.name, hv_q=2.3)
     applied_clamped = apply_pose(root, {"left_elbow": 10.0}, spec, strict=False)
     assert applied_clamped["left_elbow"] == 2.3
     assert root["q_left_elbow"] == 2.3
-    assert len(updated) == 2
 
     # Strict failure
     with pytest.raises(ValueError):
         apply_pose(root, {"left_elbow": 10.0}, spec, strict=True)
+
+
+def test_apply_pose_raises_when_drivers_stay_stale(monkeypatch, spec):
+    link = _Tagged("H01_DESIGN_J_left_elbow", hv_q=0.0)
+    root = _Tagged("H01")
+    root.children_recursive = [link]
+    updated = _mock_bpy(monkeypatch, {link.name: link}, {link.name: link})  # hv_q never changes
+    with pytest.raises(RuntimeError, match="left_elbow"):
+        apply_pose(root, {"left_elbow": 0.5}, spec)
+    assert len(updated) == 3  # retried before giving up
