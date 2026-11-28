@@ -3,6 +3,8 @@ name = "harvix-synth"
 version = "0.1.0"
 description = "Synthetic tomato-harvesting dataset generator for the Harvix robot (Blender, headless)"
 requires-python = ">=3.11"
+# Blender bundles numpy; tests need it outside Blender too.
+dependencies = ["numpy"]
 
 [tool.ruff]
 line-length = 100

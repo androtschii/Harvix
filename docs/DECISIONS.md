@@ -33,8 +33,10 @@ RealSense-class sensors used on harvesters). Recorded per sample, easy to change
 
 Fruit is Geometry Nodes instanced, so object IDs do not separate trusses. Near the camera we realize the
 visible truss instances as linked-duplicate objects (shared mesh data, no copy of geometry) with a unique
-`pass_index`, hide the same plants' fruit in the instancer through its `hidden` point attribute, and read
-instance masks from the Object Index pass. Far trusses stay instanced and are treated as background.
+`pass_index`, and hide the same plants' fruit in the instancer through its `hidden` point attribute (needs the
+modifier input `Hide Plants` on). Instance masks come from a second, Workbench pass: flat object colour per
+truss, everything else black, no anti-aliasing. It takes ~3 s, respects occlusion and needs no compositor.
+Far trusses stay instanced and are treated as background.
 
 **Cost:** a radius cut-off: trusses beyond it are rendered but unlabelled. They are small and mostly occluded
 at harvest distance; the radius is a flag and is recorded.
@@ -78,5 +80,6 @@ millimetres (no EXR, so any tool can read it).
 ## Open questions (would ask the stakeholder; assumed for now)
 
 - Real camera model and mount. Assumed as in D2.
-- Ripeness threshold for "harvest now". Assumed `ripe >= 0.9`, stored as a float so it can be re-thresholded.
+- Ripeness threshold for "harvest now". Assumed `ripe >= 0.8`, where the fruit colour ramp turns red; stored
+  as a float so it can be re-thresholded.
 - Do arms work one row side each, or both sides? Checked in step 4 from the rig.
