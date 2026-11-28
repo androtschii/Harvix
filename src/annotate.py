@@ -13,7 +13,9 @@ from __future__ import annotations
 import argparse
 import json
 import random
+import struct
 import sys
+import zlib
 from collections import defaultdict
 from pathlib import Path
 
@@ -57,6 +59,27 @@ def decode_ids(rgb8: np.ndarray) -> np.ndarray:
     """HxWx3 uint8 mask image -> HxW int id map (0 = background)."""
     q = np.rint(rgb8[..., :3].astype(np.int32) / ID_STEP).astype(np.int32).clip(0, 7)
     return q[..., 0] | (q[..., 1] << 3) | (q[..., 2] << 6)
+
+
+def depth_to_mm16(depth_m: np.ndarray) -> np.ndarray:
+    """Metres -> uint16 millimetres; 0 marks no hit or beyond 65.535 m (sky is 1e10)."""
+    mm = np.rint(np.asarray(depth_m, dtype=np.float64) * 1000.0)
+    mm[(mm <= 0) | (mm > 65535) | ~np.isfinite(mm)] = 0
+    return mm.astype(np.uint16)
+
+
+def write_png16(path: Path, img: np.ndarray) -> None:
+    """Minimal 16-bit greyscale PNG writer (no PIL in Blender's Python)."""
+    img = np.asarray(img, dtype=">u2")
+    h, w = img.shape
+    raw = b"".join(b"\x00" + img[y].tobytes() for y in range(h))
+
+    def chunk(tag: bytes, data: bytes) -> bytes:
+        return struct.pack(">I", len(data)) + tag + data + struct.pack(">I", zlib.crc32(tag + data))
+
+    ihdr = struct.pack(">IIBBBBB", w, h, 16, 0, 0, 0, 0)
+    png = b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", ihdr) + chunk(b"IDAT", zlib.compress(raw, 6))
+    Path(path).write_bytes(png + chunk(b"IEND", b""))
 
 
 def rle_encode(mask: np.ndarray) -> dict:
@@ -281,11 +304,47 @@ def _vec(a):
     return Vector((float(a[0]), float(a[1]), float(a[2])))
 
 
+def setup_depth_output(directory: Path) -> None:
+    """Compositor: Render Layers Depth -> single-layer float EXR next to the RGB frame."""
+    import bpy
+
+    sc = bpy.context.scene
+    sc.view_layers[0].use_pass_z = True
+    ng = bpy.data.node_groups.new("HX_depth", "CompositorNodeTree")
+    rl = ng.nodes.new("CompositorNodeRLayers")
+    rl.scene = sc
+    fo = ng.nodes.new("CompositorNodeOutputFile")
+    fo.directory = str(directory)
+    fo.file_name = ""
+    fo.format.media_type = "IMAGE"  # Blender 5.x: defaults to multilayer
+    fo.format.file_format = "OPEN_EXR"
+    fo.format.color_depth = "32"
+    fo.format.color_mode = "BW"
+    fo.file_output_items.clear()
+    item = fo.file_output_items.new("FLOAT", "depth")
+    ng.links.new(rl.outputs["Depth"], fo.inputs[item.name])
+    sc.compositing_node_group = ng
+
+
+def read_depth_exr(directory: Path) -> np.ndarray:
+    """Read the depth EXR written by the compositor (top-down rows, metres) and delete it."""
+    import bpy
+
+    exr = next(directory.glob("depth*.exr"))
+    img = bpy.data.images.load(str(exr))
+    w, h = img.size
+    px = np.array(img.pixels[:], dtype=np.float32).reshape(h, w, img.channels)[::-1, :, 0]
+    bpy.data.images.remove(img)
+    exr.unlink()
+    return px
+
+
 def render_id_pass(trusses: list[dict], path: Path) -> np.ndarray:
     """Workbench render: flat object colour = truss id, everything else black."""
     import bpy
 
     sc = bpy.context.scene
+    sc.compositing_node_group = None  # the depth compositor would overwrite depth with Workbench Z
     sc.render.engine = "BLENDER_WORKBENCH"
     sh = sc.display.shading
     sh.light = "FLAT"
@@ -357,8 +416,10 @@ def main(argv: list[str] | None = None) -> None:
         sc.render.engine = "CYCLES"
         sc.cycles.samples = args.samples
         sc.cycles.use_denoising = True
+        setup_depth_output(out)
         sc.render.filepath = str(out / "rgb.png")
         bpy.ops.render.render(write_still=True)
+        write_png16(out / "depth.png", depth_to_mm16(read_depth_exr(out)))
     ids = render_id_pass(trusses, out / "mask.png")
 
     anns = build_annotations(ids, trusses, image_id=args.seed)
@@ -366,6 +427,7 @@ def main(argv: list[str] | None = None) -> None:
         "id": args.seed,
         "file_name": "rgb.png",
         "mask_file": "mask.png",
+        "depth_file": None if args.no_rgb else "depth.png",
         "width": cam_spec.width,
         "height": cam_spec.height,
     }

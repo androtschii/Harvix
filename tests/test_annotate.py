@@ -7,12 +7,14 @@ from annotate import (
     bbox_xywh,
     build_annotations,
     decode_ids,
+    depth_to_mm16,
     id_to_srgb8,
     parse_args,
     ripeness,
     rle_decode,
     rle_encode,
     srgb8_to_linear,
+    write_png16,
 )
 
 
@@ -97,3 +99,28 @@ def test_parse_args():
         32,
         False,
     )
+
+
+def test_depth_to_mm16():
+    d = np.array([[0.5817, 3.9448], [1e10, -1.0]])
+    assert depth_to_mm16(d).tolist() == [[582, 3945], [0, 0]]
+    assert depth_to_mm16(np.array([[65.5355]])).tolist() == [[0]]
+    assert depth_to_mm16(np.array([[np.nan]])).tolist() == [[0]]
+
+
+def test_write_png16_roundtrip(tmp_path):
+    import struct
+    import zlib
+
+    img = np.array([[0, 1, 65535], [1000, 2, 3]], dtype=np.uint16)
+    path = tmp_path / "d.png"
+    write_png16(path, img)
+    data = path.read_bytes()
+    assert data[:8] == b"\x89PNG\r\n\x1a\n"
+    w, h, depth, ctype = struct.unpack(">IIBB", data[16:26])
+    assert (w, h, depth, ctype) == (3, 2, 16, 0)
+    idat_len = struct.unpack(">I", data[33:37])[0]
+    raw = zlib.decompress(data[41 : 41 + idat_len])
+    rows = [raw[y * 7 + 1 : (y + 1) * 7] for y in range(2)]
+    back = np.array([np.frombuffer(r, dtype=">u2") for r in rows])
+    assert (back == img).all()
