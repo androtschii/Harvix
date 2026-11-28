@@ -1,7 +1,9 @@
 import json
+import subprocess
 
 import pytest
 
+import generate
 from generate import (
     collect_sample,
     done_seeds,
@@ -86,3 +88,16 @@ def test_parse_args(tmp_path):
         2.0,
         32,
     )
+
+
+def test_timeout_marks_seed_failed(tmp_path, monkeypatch):
+    calls = []
+
+    def fake_run(cmd, **kw):
+        calls.append(kw["timeout"])
+        raise subprocess.TimeoutExpired(cmd, kw["timeout"])
+
+    monkeypatch.setattr(generate.subprocess, "run", fake_run)
+    code = generate.main(["--seeds", "0:2", "--out", str(tmp_path), "--timeout", "5"])
+    assert code == 1
+    assert calls == [5, 5]  # both seeds tried, the first timeout did not stop the batch

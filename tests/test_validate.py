@@ -9,6 +9,7 @@ from validate import (
     check_annotation,
     check_depth,
     check_meta,
+    check_projection,
     mask_outline,
     summarize,
     validate,
@@ -27,6 +28,7 @@ def _ann(image_id=5, tid=1, ripeness=0.85, **over):
     m = _mask()
     a = {
         "id": image_id * 1000 + tid,
+        "truss_id": tid,
         "image_id": image_id,
         "category_id": 1,
         "area": int(m.sum()),
@@ -72,6 +74,7 @@ def test_check_meta():
     assert check_meta(5, good, spec) == []
     assert check_meta(5, None, spec)
     assert check_meta(5, {**good, "robot": {"lane_x": 12, "y": 0}}, spec)
+    assert "bad metadata" in check_meta(5, {"robot": {"lane_x": 13}}, spec)[0]
 
 
 def _meta(seed, side, ripe_shift=-0.1):
@@ -119,6 +122,7 @@ def test_validate_end_to_end(tmp_path):
     }
     (ds / "annotations.json").write_text(json.dumps({"images": [img], "annotations": [_ann()]}))
     meta = {**_meta(5, "left"), "pose": preset("neutral", load_spec())}
+    meta["camera"]["K"] = [[457.0, 0, 4.0], [0, 457.0, 3.0], [0, 0, 1]]
     (ds / "metadata.jsonl").write_text(json.dumps(meta) + "\n")
 
     stats, problems = validate(ds, overlays=1)
@@ -134,3 +138,20 @@ def test_mask_outline():
     o = mask_outline(m)
     assert o.sum() == 8 and not o[2, 2]
     assert not mask_outline(np.zeros((3, 3), dtype=bool)).any()
+
+
+def test_check_projection_catches_camera_mismatch():
+    K = [[100.0, 0, 50.0], [0, 100.0, 40.0], [0, 0, 1]]
+
+    def ann(u, v, shift=0):
+        # centre_cam that projects to (u, v); bbox centred at (u + shift, v)
+        return {
+            "center_cam": [(u - 50) / 100, (v - 40) / 100, 1.0],
+            "bbox": [u + shift - 2, v - 2, 4, 4],
+        }
+
+    aligned = [ann(10, 10), ann(60, 30), ann(80, 70)]
+    assert check_projection(aligned, K, 1) == []
+    shifted = [ann(10, 10, 40), ann(60, 30, 40), ann(80, 70, 40)]
+    assert "offset" in check_projection(shifted, K, 1)[0]
+    assert check_projection(shifted[:2], K, 1) == []  # too few trusses to judge

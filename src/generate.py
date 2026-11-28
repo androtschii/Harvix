@@ -113,6 +113,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument("--side", default="alternate", choices=["alternate", "left", "right"])
     p.add_argument("--radius", type=float, default=2.0)
     p.add_argument("--samples", type=int, default=32)
+    p.add_argument("--timeout", type=int, default=1800, help="Seconds per sample before giving up")
     p.add_argument("--blender", default="blender")
     p.add_argument("--blend", type=Path, default=ROOT / "assets" / "Harvix_Greenhouse.blend")
     return p.parse_args(argv)
@@ -133,9 +134,18 @@ def main(argv: list[str] | None = None) -> int:
         sample_dir = out / "_work" / stem(seed)
         shutil.rmtree(sample_dir, ignore_errors=True)
         t0 = time.perf_counter()
-        proc = subprocess.run(
-            blender_cmd(args, seed, sample_dir), capture_output=True, text=True, errors="replace"
-        )
+        try:
+            proc = subprocess.run(
+                blender_cmd(args, seed, sample_dir),
+                capture_output=True,
+                text=True,
+                errors="replace",
+                timeout=args.timeout,  # a hung GPU render must not eat the whole session
+            )
+        except subprocess.TimeoutExpired:
+            failed.append(seed)
+            print(f"[generate] seed {seed} FAILED: no result after {args.timeout} s", flush=True)
+            continue
         if proc.returncode != 0 or not (sample_dir / "metadata.json").exists():
             failed.append(seed)
             tail = "\n".join((proc.stdout + proc.stderr).splitlines()[-15:])
