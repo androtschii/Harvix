@@ -92,6 +92,9 @@ def summarize(coco: dict, meta: dict[int, dict]) -> dict:
             "max": max(counts, default=0),
         },
         "ripe_share": round(sum(a["ripe"] for a in anns) / max(len(anns), 1), 3),
+        "cut_point_visible_share": round(
+            sum(a.get("cut_point_visible") is True for a in anns) / max(len(anns), 1), 3
+        ),
         "ripeness_quartiles": [
             round(float(q), 2)
             for q in np.quantile([a["ripeness"] for a in anns] or [0], [0.25, 0.5, 0.75])

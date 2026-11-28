@@ -94,6 +94,7 @@ def test_summarize():
     assert (s["images"], s["annotations"]) == (2, 3)
     assert s["trusses_per_image"] == {"min": 0, "mean": 1.5, "max": 3}
     assert s["ripe_share"] == round(2 / 3, 3)
+    assert s["cut_point_visible_share"] == 0  # field absent in these annotations
     assert s["visible_of_realized"] == round(3 / 8, 3)
     assert s["sides"] == {"right": 1, "left": 1}
     assert s["lanes_used"] == 2

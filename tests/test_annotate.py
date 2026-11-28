@@ -6,6 +6,7 @@ from annotate import (
     RIPE_THRESHOLD,
     bbox_xywh,
     build_annotations,
+    cut_point_visible,
     decode_ids,
     depth_to_mm16,
     id_to_srgb8,
@@ -124,3 +125,14 @@ def test_write_png16_roundtrip(tmp_path):
     rows = [raw[y * 7 + 1 : (y + 1) * 7] for y in range(2)]
     back = np.array([np.frombuffer(r, dtype=">u2") for r in rows])
     assert (back == img).all()
+
+
+def test_cut_point_visible():
+    depth = np.full((10, 10), 2.0)
+    depth[4:7, 4:7] = 0.8  # a leaf in front
+    assert cut_point_visible(depth, (2.5, 2.5), 2.01) is True
+    assert cut_point_visible(depth, (5.0, 5.0), 2.0) is False  # hidden behind the leaf
+    assert cut_point_visible(depth, (5.0, 5.0), 0.81) is True
+    assert cut_point_visible(depth, (12.0, 5.0), 2.0) is None  # outside the image
+    assert cut_point_visible(depth, None, 2.0) is None
+    assert cut_point_visible(np.zeros((4, 4)), (1, 1), 2.0) is False  # sky only
